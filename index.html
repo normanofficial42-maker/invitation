@@ -7,7 +7,7 @@
 <meta name="description" content="Norman and Angenith are getting married on 31 October 2026 at LJ Mega Convention, Butuan City.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Parisienne&family=Cinzel:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;500;600&family=Montserrat:ital,wght@0,400;0,500;0,600;1,400&display=swap">
 <style>
   /* Blue watercolor, gold and florals: one committed light look, painted explicitly on any host theme. */
   :root {
@@ -23,9 +23,9 @@
     --paper: #FFFEFB;
     --ink: #22305A;
     --muted: #454E6E;
-    --script: "Parisienne", "Snell Roundhand", "Apple Chancery", cursive;
+    --script: "Alex Brush", "Snell Roundhand", "Apple Chancery", cursive;
     --caps: "Cinzel", "Trajan Pro", Georgia, serif;
-    --body: "EB Garamond", Garamond, "Times New Roman", serif;
+    --body: "Montserrat", "Segoe UI", Helvetica, Arial, sans-serif;
     /* theme artwork, set from the IMAGES list in the script */
     --img-wash: none; --img-wreath-gold: none; --img-wreath-blue: none;
     --img-hexagon: none; --img-bouquet: none; --img-corner-tl: none; --img-corner-br: none; --img-card-blush: none; --img-spray: none;
@@ -38,8 +38,8 @@
     background: #F7FAFD var(--img-wash) center top / cover no-repeat fixed;
     color: var(--ink);
     font-family: var(--body);
-    font-size: 1.15rem;
-    line-height: 1.65;
+    font-size: 1rem;
+    line-height: 1.75;
     padding-inline: 16px;
     overflow-x: hidden;
   }
@@ -146,7 +146,7 @@
     border: 1px solid var(--gold);
     box-shadow: inset 0 0 0 4px #fff, inset 0 0 0 5px var(--gold-light);
   }
-  .unit b { font-family: var(--body); font-weight: 500; font-size: clamp(20px, 7.4cqw, 36px); line-height: 1; color: var(--navy); font-variant-numeric: lining-nums tabular-nums; }
+  .unit b { font-family: var(--body); font-weight: 500; font-size: clamp(18px, 6.4cqw, 32px); line-height: 1; color: var(--navy); font-variant-numeric: lining-nums tabular-nums; }
   .unit span { font-family: var(--caps); font-size: clamp(8.5px, 2.1cqw, 11px); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); margin-top: 3px; }
   .countdown-date { font-family: var(--caps); font-size: .76rem; letter-spacing: .26em; color: var(--muted); margin-top: 8px; text-align: center; }
 
@@ -155,8 +155,8 @@
   .events .art { margin: 0; flex: 0 1 380px; }
   .event h3 { font-family: var(--caps); font-weight: 400; font-size: clamp(10.5px, 3cqw, 13px); font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #9A7A40; margin: 0; }
   .event .time { font-family: var(--script); font-size: clamp(20px, 7cqw, 32px); line-height: 1.15; color: var(--navy); margin: 2cqw 0 1cqw; }
-  .event .place { font-weight: 500; font-size: clamp(13px, 4.2cqw, 18px); margin: 0; line-height: 1.3; }
-  .event .addr { color: var(--muted); font-size: clamp(12px, 3.8cqw, 16px); margin: 1cqw 0 0; line-height: 1.3; }
+  .event .place { font-weight: 600; font-size: clamp(12px, 3.8cqw, 16px); margin: 0; line-height: 1.3; }
+  .event .addr { color: var(--muted); font-size: clamp(11px, 3.3cqw, 14px); margin: 1cqw 0 0; line-height: 1.3; }
 
   /* Map */
   .map-card { padding: 14px; }
@@ -209,7 +209,7 @@
 
   /* Attire, centered inside the hexagon */
   .attire-title { font-family: var(--caps); font-size: clamp(13px, 4cqw, 19px); font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--navy); margin: 0 0 1cqw; white-space: nowrap; }
-  .attire-note { font-size: clamp(12px, 3.2cqw, 15px); color: var(--muted); font-style: italic; margin: 0 0 3cqw; line-height: 1.35; }
+  .attire-note { font-size: clamp(11px, 2.9cqw, 14px); color: var(--muted); font-style: italic; margin: 0 0 3cqw; line-height: 1.35; }
   .swatches { display: flex; flex-wrap: wrap; justify-content: center; gap: 2.4cqw 1.6cqw; width: 100%; }
   .swatch { text-align: center; font-size: clamp(9.5px, 2.4cqw, 12px); line-height: 1.2; color: var(--ink); min-width: 9.4cqw; }
   .swatch i { display: block; width: clamp(20px, 7cqw, 34px); aspect-ratio: 1; border-radius: 50%; margin: 0 auto 1cqw; border: 1px solid var(--gold); box-shadow: inset 0 0 0 3px var(--paper); }
@@ -218,7 +218,7 @@
   .carousel { container-type: inline-size; position: relative; max-width: 940px; margin: 0 auto; }
   .stage { --cw: min(40cqw, 360px); position: relative; height: calc(var(--cw) * 1.25 + 40px); overflow: hidden; touch-action: pan-y; }
   .cslide {
-    position: absolute; left: 50%; top: 14px; width: var(--cw); margin-left: calc(var(--cw) / -2); aspect-ratio: 4 / 5;
+    position: absolute; left: calc(50% - var(--cw) / 2); top: 14px; width: var(--cw); margin: 0; aspect-ratio: 4 / 5;
     background: var(--paper); padding: 8px; border: 1px solid var(--gold-light);
     box-shadow: 0 22px 40px -24px rgba(27, 46, 92, .55);
     transition: transform .9s cubic-bezier(.65, .05, .25, 1), opacity .9s ease; will-change: transform;
@@ -249,7 +249,7 @@
   .gift::before { content: ""; position: absolute; inset: 6px; border: .5px solid var(--champagne); pointer-events: none; }
   .gift h3 { font-family: var(--caps); font-weight: 500; font-size: .86rem; letter-spacing: .26em; text-transform: uppercase; color: var(--navy); margin: 0; }
   .gift .kind { font-size: 1rem; color: var(--muted); font-style: italic; margin: 2px 0 10px; }
-  .gift .num { font-family: var(--body); font-weight: 500; font-size: 1.6rem; letter-spacing: .06em; color: var(--royal); margin: 0 0 14px; font-variant-numeric: lining-nums tabular-nums; user-select: all; }
+  .gift .num { font-family: var(--body); font-weight: 500; font-size: 1.3rem; letter-spacing: .04em; color: var(--royal); margin: 0 0 14px; font-variant-numeric: lining-nums tabular-nums; user-select: all; }
   .gift .btn { padding: 8px 16px; font-size: .64rem; position: relative; }
   .gift .copy-note { display: block; min-height: 1.3em; font-size: .95rem; font-style: italic; color: var(--gold); margin-top: 8px; }
 
@@ -269,7 +269,7 @@
   .field.full { grid-column: 1 / -1; }
   label, legend { font-family: var(--caps); font-size: .74rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: #9A7A40; }
   input[type="text"], select, textarea {
-    font: inherit; font-size: 1.1rem; color: var(--ink); background: rgba(244, 238, 227, .85);
+    font: inherit; font-size: 1rem; color: var(--ink); background: rgba(244, 238, 227, .85);
     border: 1px solid var(--gold-light); border-radius: 0; padding: 9px 12px; width: 100%;
   }
   textarea { min-height: 90px; resize: vertical; }
@@ -277,7 +277,7 @@
   .choices { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
   .choices label {
     display: flex; align-items: center; gap: 8px; cursor: pointer;
-    font-family: var(--body); font-size: 1.1rem; letter-spacing: 0; text-transform: none; color: var(--ink);
+    font-family: var(--body); font-size: 1rem; letter-spacing: 0; text-transform: none; color: var(--ink);
     border: 1px solid var(--gold-light); padding: 7px 14px; background: var(--paper);
   }
   .choices input { accent-color: var(--navy); }
@@ -286,7 +286,7 @@
   .error { color: #A2412B; font-size: 1rem; margin: 4px 0 8px; min-height: 1.2em; }
   .reply { margin: 24px auto 0; background: var(--beige); padding: 20px; border: 1px solid var(--gold-light); text-align: left; }
   .reply p { margin: 0 0 10px; }
-  .reply pre { white-space: pre-wrap; word-break: break-word; font-family: var(--body); font-size: 1.05rem; background: var(--paper); border: 1px dashed var(--gold); padding: 14px; margin: 0 0 14px; user-select: all; }
+  .reply pre { white-space: pre-wrap; word-break: break-word; font-family: var(--body); font-size: .95rem; background: var(--paper); border: 1px dashed var(--gold); padding: 14px; margin: 0 0 14px; user-select: all; }
   .reply .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
   .copied { color: var(--royal); font-style: italic; }
 
@@ -295,6 +295,24 @@
   footer .wreath-gold { width: min(100%, 360px); }
   footer .names { font-size: clamp(30px, 11cqw, 52px); }
   footer .small-caps { color: var(--gold); font-size: clamp(8px, 2.6cqw, 12px); margin-top: 2cqw; }
+
+  /* Background music button */
+  .music {
+    position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 30;
+    display: flex; align-items: center; gap: 10px; padding: 8px 16px 8px 8px; border-radius: 999px; cursor: pointer;
+    background: rgba(255, 254, 251, .95); border: 1px solid var(--gold); color: var(--navy);
+    font-family: var(--caps); font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+    box-shadow: 0 12px 26px -14px rgba(27, 46, 92, .55);
+  }
+  .music .disc {
+    width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; flex: 0 0 auto;
+    background: radial-gradient(circle at 35% 30%, #fff, var(--wash) 70%, #C9D9EA); border: 1px solid var(--gold-light);
+  }
+  .music svg { width: 16px; height: 16px; fill: var(--navy); }
+  .music.playing .disc { animation: spin 6s linear infinite; }
+  .music.playing .label-play, .music:not(.playing) .label-pause { display: none; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (max-width: 640px) { .music { padding: 6px; } .music .label { display: none; } }
 
   @media (max-width: 640px) {
     .nav ul { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; scrollbar-width: none; gap: 18px; }
@@ -585,6 +603,12 @@
   </div>
 </footer>
 
+<button class="music" type="button" id="music-btn" aria-pressed="false" hidden>
+  <span class="disc" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 17.5A2.5 2.5 0 1 1 6.5 15c.53 0 1.02.16 1.5.44V5l11-2v11.5a2.5 2.5 0 1 1-2.5-2.5c.53 0 1.02.16 1.5.44V7.1L10 8.6v8.9z"/></svg></span>
+  <span class="label"><span class="label-play">Play music</span><span class="label-pause">Pause music</span></span>
+</button>
+<audio id="bg-music" loop preload="metadata"></audio>
+
 <script>
   /* =====================================================================
      REPLACEABLE LINKS
@@ -618,6 +642,8 @@
     ],
     map: ""
   };
+  /* MUSIC: an instrumental MP3 placed in the "music" folder. Leave "" to hide the music button. */
+  var MUSIC = "music/wedding-instrumental.mp3";
   var MAP_EMBED = "auto";
   var VENUE_QUERY = "LJ Mega Convention, Butuan City";
   var RSVP_CONTACT = "the couple at 0917 000 0000";
@@ -837,6 +863,29 @@
       catch (e) { fallback(); }
     });
   });
+
+  // ---------- Background music: starts on the guest's first tap, button to pause ----------
+  (function () {
+    var btn = document.getElementById("music-btn"), audio = document.getElementById("bg-music");
+    if (!MUSIC) return;
+    audio.src = MUSIC; audio.volume = .45;
+    var started = false;
+    function setState(on) { btn.classList.toggle("playing", on); btn.setAttribute("aria-pressed", on ? "true" : "false"); }
+    function play() { var p = audio.play(); if (p && p.catch) p.catch(function () { setState(false); }); }
+    audio.addEventListener("play", function () { setState(true); });
+    audio.addEventListener("pause", function () { setState(false); });
+    audio.addEventListener("error", function () { btn.hidden = true; });
+    audio.addEventListener("loadedmetadata", function () { btn.hidden = false; });
+    audio.load();
+    btn.addEventListener("click", function (e) { e.stopPropagation(); started = true; if (audio.paused) play(); else audio.pause(); });
+    function firstTap() {
+      document.removeEventListener("pointerdown", firstTap);
+      document.removeEventListener("keydown", firstTap);
+      if (!started) { started = true; play(); }
+    }
+    document.addEventListener("pointerdown", firstTap);
+    document.addEventListener("keydown", firstTap);
+  })();
 
   // ---------- RSVP: builds a reply the guest can copy and send ----------
   (function () {
