@@ -264,6 +264,8 @@
   .gift .kind { font-size: 1rem; color: var(--muted); font-style: italic; margin: 2px 0 10px; }
   .gift .num { font-family: var(--body); font-weight: 500; font-size: 1.3rem; letter-spacing: .04em; color: var(--royal); margin: 0 0 14px; font-variant-numeric: lining-nums tabular-nums; user-select: all; }
   .gift .btn { padding: 8px 16px; font-size: .64rem; position: relative; }
+  .gift .acct { margin: -6px 0 14px; font-size: .92rem; color: var(--muted); }
+  .gift .acct b { color: var(--navy); font-weight: 600; }
   .gift .copy-note { display: block; min-height: 1.3em; font-size: .95rem; font-style: italic; color: var(--gold); margin-top: 8px; }
 
   /* RSVP */
@@ -423,11 +425,11 @@
     <div class="inner">
       <div class="sec-head">
         <p class="small-caps">Our wedding music</p>
-        <h2>Great Is Thy Faithfulness</h2>
+        <h2>Blessed Assurance</h2>
         <div class="divider"><i></i></div>
       </div>
       <div class="yt-frame"><div id="yt-player"></div></div>
-      <p class="yt-credit">Instrumental by <span id="yt-artist">Tim Janis</span>, played from YouTube. Tap the music button any time to pause.</p>
+      <p class="yt-credit">Piano instrumental by <span id="yt-artist">Kaleb Brasee</span>, played from YouTube. Tap the music button any time to pause.</p>
     </div>
   </section>
 
@@ -551,6 +553,7 @@
             <h3>GCash</h3>
             <p class="kind">Mobile number</p>
             <p class="num">+63 950 564 4255</p>
+          <p class="acct">Account name: <b>Norman Samson</b></p>
             <button class="btn line" type="button" data-copy="+639505644255" data-note="gcash-note">Copy number</button>
             <span class="copy-note" id="gcash-note" aria-live="polite"></span>
           </div>
@@ -558,6 +561,7 @@
             <h3>GoTyme Bank</h3>
             <p class="kind">Account number</p>
             <p class="num">01901945134</p>
+          <p class="acct">Account name: <b>Norman Samson</b></p>
             <button class="btn line" type="button" data-copy="01901945134" data-note="gotyme-note">Copy number</button>
             <span class="copy-note" id="gotyme-note" aria-live="polite"></span>
           </div>
@@ -673,10 +677,10 @@
   /* MUSIC: background music. "youtube" is a YouTube video id (the part after "watch?v=").
      "mp3" is an optional MP3 in the "music" folder; when set it is used instead of YouTube.
      The YouTube player only works on the live site, not inside the claude.ai preview. */
-  var MUSIC = { youtube: "zwzOyq4iwOw", artist: "Tim Janis", title: "Great Is Thy Faithfulness", mp3: "" };
+  var MUSIC = { youtube: "HwUzA6I8_U4", artist: "Kaleb Brasee", title: "Blessed Assurance", mp3: "" };
   var MAP_EMBED = "auto";
   var VENUE_QUERY = "LJ Mega Convention, Butuan City";
-  var RSVP_CONTACT = "the couple at 0917 000 0000";
+  var RSVP_CONTACT = "Norman at 0950 564 4255";
 
   /* ENTOURAGE: edit the names between the quotes. */
   var ENTOURAGE = {
@@ -716,7 +720,7 @@
     maidOfHonor: ["Ivy Rose Villanueva"],
     groomsmen: ["Angelou Taghap", "Jhon Mark Parabas", "Adrian Jay Taghap", "Kalvin Bryce Pimentel", "Mac James Caneda", "Arjohn Taghap", "Ashley Mark Avila"],
     bridesmaids: ["Rachel Langga", "Jodie Mae Cepriano", "Khim Macose", "Ahzlleah Grace Taghap", "Emelyn Salas", "Jewel Lou Senamin", "Jean Michelle"],
-    littleGroom: ["Matt2"],
+    littleGroom: ["Matteo Chen R. Custo"],
     littleBride: ["Zadie Say-a"],
     bearers: [
       { role: "Ring Bearer", names: "Joseph Emmanuel Ancheta" },
