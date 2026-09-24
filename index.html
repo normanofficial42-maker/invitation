@@ -32,10 +32,12 @@
   }
   * { box-sizing: border-box; }
   [hidden] { display: none !important; }
+  /* Parallax background: a fixed watercolor layer that drifts slower than the page, on phones too */
+  .parallax { position: fixed; left: 0; right: 0; top: 0; height: 135vh; height: 135lvh; z-index: -1; pointer-events: none; background: var(--img-wash) center top / cover no-repeat; will-change: transform; }
   html { scroll-behavior: smooth; }
   body {
     margin: 0;
-    background: #F7FAFD var(--img-wash) center top / cover no-repeat fixed;
+    background: #F7FAFD;
     color: var(--ink);
     font-family: var(--body);
     font-size: 1rem;
@@ -43,7 +45,6 @@
     padding-inline: 16px;
     overflow-x: hidden;
   }
-  @media (hover: none) { body { background-attachment: scroll; background-size: 100% auto; background-repeat: repeat-y; } }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; } }
   a { color: var(--royal); }
   :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
@@ -103,12 +104,6 @@
   .wreath-blue .bg { background-image: var(--img-wreath-blue); background-size: 100% auto; background-position: 50% 48%; }
   .wreath-blue .slot { --l: 26%; --t: 25%; --w: 50%; --h: 51%; }
 
-  /* Gold rose wreath (square crop) */
-  .wreath-gold { width: min(100%, 400px); aspect-ratio: 1; }
-  .wreath-gold .bg { background-image: var(--img-wreath-gold); background-size: 100% auto; background-position: 50% 48%; }
-  .wreath-gold.flip .bg { transform: scaleX(-1); }
-  .wreath-gold .slot { --l: 27%; --t: 33%; --w: 57%; --h: 50%; }
-  .wreath-gold.flip .slot { --l: 16%; }
 
   /* Gold hexagon with blue roses */
   .hexagon { width: min(100%, 470px); aspect-ratio: 1414 / 2000; }
@@ -151,12 +146,24 @@
   .countdown-date { font-family: var(--caps); font-size: .76rem; letter-spacing: .26em; color: var(--muted); margin-top: 8px; text-align: center; }
 
   /* Details in the gold wreaths */
-  .events { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 30px; }
-  .events .art { margin: 0; flex: 0 1 380px; }
-  .event h3 { font-family: var(--caps); font-weight: 400; font-size: clamp(10.5px, 3cqw, 13px); font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #9A7A40; margin: 0; }
-  .event .time { font-family: var(--script); font-size: clamp(20px, 7cqw, 32px); line-height: 1.15; color: var(--navy); margin: 2cqw 0 1cqw; }
-  .event .place { font-weight: 600; font-size: clamp(12px, 3.8cqw, 16px); margin: 0; line-height: 1.3; }
-  .event .addr { color: var(--muted); font-size: clamp(11px, 3.3cqw, 14px); margin: 1cqw 0 0; line-height: 1.3; }
+  /* Details and closing: gold-lined arch cards, each crowned with the flower spray */
+  .events { display: flex; flex-wrap: wrap; justify-content: center; gap: 130px 34px; padding-top: 110px; }
+  .arch {
+    position: relative; flex: 0 1 340px; text-align: center;
+    background: rgba(255, 254, 251, .95); border: 1px solid var(--gold);
+    border-radius: 190px 190px 6px 6px; padding: 76px 28px 38px;
+    box-shadow: 0 24px 44px -28px rgba(27, 46, 92, .45);
+  }
+  .arch::before { content: ""; position: absolute; inset: 7px; border: 1px solid var(--gold-light); border-radius: 183px 183px 3px 3px; pointer-events: none; }
+  .crown {
+    position: absolute; left: calc(50% - 75px); top: -150px; width: 150px; aspect-ratio: 1414 / 2000; pointer-events: none;
+    background: var(--img-spray) center / 100% 100% no-repeat; transform: rotate(-90deg);
+  }
+  .flip .crown { transform: rotate(-90deg) scaleY(-1); }
+  .event h3 { font-family: var(--caps); font-size: .84rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #9A7A40; margin: 0; }
+  .event .time { font-family: var(--script); font-size: 2.1rem; line-height: 1.2; color: var(--navy); margin: 10px 0 6px; }
+  .event .place { font-weight: 600; font-size: 1.02rem; margin: 0; line-height: 1.4; }
+  .event .addr { color: var(--muted); font-size: .92rem; margin: 4px 0 0; line-height: 1.4; }
 
   /* Map */
   .map-card { padding: 14px; }
@@ -206,6 +213,9 @@
   .roles h4 { font-family: var(--caps); font-weight: 600; font-size: .76rem; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); margin: 0 0 6px; }
   .roles p { margin: 0; }
   .ph { color: var(--muted); font-style: italic; }
+  .sponsors { list-style: none; margin: 0 auto; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 36px; max-width: 820px; line-height: 1.5; }
+  .roles .note { font-style: italic; color: var(--muted); font-size: .88rem; margin: -2px 0 4px; }
+  .ent-group li, .ent-group p { font-size: .95rem; }
 
   /* Attire, centered inside the hexagon */
   .attire-title { font-family: var(--caps); font-size: clamp(13px, 4cqw, 19px); font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--navy); margin: 0 0 1cqw; white-space: nowrap; }
@@ -291,10 +301,15 @@
   .copied { color: var(--royal); font-style: italic; }
 
   /* Footer in the gold wreath */
-  footer { padding-block: 40px 70px; }
-  footer .wreath-gold { width: min(100%, 360px); }
-  footer .names { font-size: clamp(30px, 11cqw, 52px); }
-  footer .small-caps { color: var(--gold); font-size: clamp(8px, 2.6cqw, 12px); margin-top: 2cqw; }
+  footer { padding-block: 150px 70px; }
+  footer .closing { max-width: 360px; margin: 0 auto; flex: none; padding-block: 70px 34px; }
+  footer .names { font-size: clamp(2.4rem, 9vw, 3.2rem); }
+  footer .small-caps { color: #9A7A40; font-size: .78rem; margin-top: 12px; }
+
+  /* Wedding music: YouTube player, kept visible on the page */
+  .yt-frame { max-width: 560px; margin: 0 auto; aspect-ratio: 16 / 9; padding: 8px; background: var(--paper); border: 1px solid var(--gold-light); box-shadow: 0 22px 40px -26px rgba(27, 46, 92, .5); }
+  .yt-frame iframe, #yt-player { width: 100%; height: 100%; display: block; border: 0; }
+  .yt-credit { text-align: center; color: var(--muted); font-size: .9rem; margin: 14px auto 0; max-width: 46ch; }
 
   /* Background music button */
   .music {
@@ -325,6 +340,7 @@
     .pair { gap: 0 16px; font-size: 1.05rem; }
     .grid3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .roles { grid-template-columns: 1fr; }
+    .sponsors { grid-template-columns: 1fr; gap: 8px; }
     .arrow { width: 36px; height: 36px; }
     .arrow.prev { left: 0; } .arrow.next { right: 0; }
     .map-frame { aspect-ratio: 4 / 3; }
@@ -345,10 +361,13 @@
   </defs>
 </svg>
 
+<div class="parallax" id="parallax" aria-hidden="true"></div>
+
 <nav class="nav" aria-label="Sections">
   <ul>
     <li><a href="#invite">Invitation</a></li>
     <li><a href="#countdown">Countdown</a></li>
+    <li><a href="#music">Music</a></li>
     <li><a href="#details">Details</a></li>
     <li><a href="#map">Map</a></li>
     <li><a href="#entourage">Entourage</a></li>
@@ -397,6 +416,18 @@
     </div>
   </section>
 
+  <section class="band" id="music" hidden>
+    <div class="inner">
+      <div class="sec-head">
+        <p class="small-caps">Our wedding music</p>
+        <h2>Great Is Thy Faithfulness</h2>
+        <div class="divider"><i></i></div>
+      </div>
+      <div class="yt-frame"><div id="yt-player"></div></div>
+      <p class="yt-credit">Instrumental by <span id="yt-artist">Tim Janis</span>, played from YouTube. Tap the music button any time to pause.</p>
+    </div>
+  </section>
+
   <section class="band" id="details">
     <div class="inner">
       <div class="sec-head">
@@ -405,23 +436,19 @@
         <div class="divider"><i></i></div>
       </div>
       <div class="events">
-        <article class="art wreath-gold event">
-          <div class="bg" aria-hidden="true"></div>
-          <div class="slot">
-            <h3>Wedding Ceremony</h3>
-            <p class="time">3:00 in the afternoon</p>
-            <p class="place">LJ Mega Convention</p>
-            <p class="addr">Saturday, 31 October 2026</p>
-          </div>
+        <article class="arch event">
+          <div class="crown" aria-hidden="true"></div>
+          <h3>Wedding Ceremony</h3>
+          <p class="time">3:00 in the afternoon</p>
+          <p class="place">LJ Mega Convention</p>
+          <p class="addr">Saturday, 31 October 2026</p>
         </article>
-        <article class="art wreath-gold flip event">
-          <div class="bg" aria-hidden="true"></div>
-          <div class="slot">
-            <h3>Reception</h3>
-            <p class="time">to follow</p>
-            <p class="place">LJ Mega Convention</p>
-            <p class="addr">Same venue, right after the ceremony</p>
-          </div>
+        <article class="arch event flip">
+          <div class="crown" aria-hidden="true"></div>
+          <h3>Reception</h3>
+          <p class="time">to follow</p>
+          <p class="place">LJ Mega Convention</p>
+          <p class="addr">Same venue, right after the ceremony</p>
         </article>
       </div>
     </div>
@@ -594,12 +621,10 @@
 </main>
 
 <footer>
-  <div class="art wreath-gold">
-    <div class="bg" aria-hidden="true"></div>
-    <div class="slot">
-      <p class="names">Norman<span class="amp">&amp;</span>Angenith</p>
-      <p class="small-caps">#NormanAndAngenith &middot; 10.31.2026</p>
-    </div>
+  <div class="arch closing">
+    <div class="crown" aria-hidden="true"></div>
+    <p class="names">Norman<span class="amp">&amp;</span>Angenith</p>
+    <p class="small-caps">#NormanAndAngenith &middot; 10.31.2026</p>
   </div>
 </footer>
 
@@ -642,30 +667,60 @@
     ],
     map: ""
   };
-  /* MUSIC: an instrumental MP3 placed in the "music" folder. Leave "" to hide the music button. */
-  var MUSIC = "music/wedding-instrumental.mp3";
+  /* MUSIC: background music. "youtube" is a YouTube video id (the part after "watch?v=").
+     "mp3" is an optional MP3 in the "music" folder; when set it is used instead of YouTube.
+     The YouTube player only works on the live site, not inside the claude.ai preview. */
+  var MUSIC = { youtube: "zwzOyq4iwOw", artist: "Tim Janis", title: "Great Is Thy Faithfulness", mp3: "" };
   var MAP_EMBED = "auto";
   var VENUE_QUERY = "LJ Mega Convention, Butuan City";
   var RSVP_CONTACT = "the couple at 0917 000 0000";
 
-  /* ENTOURAGE: type names between the quotes. Empty "" shows a placeholder. */
-  function blanks(n) { return Array.apply(null, Array(n)).map(function () { return ""; }); }
+  /* ENTOURAGE: edit the names between the quotes. */
   var ENTOURAGE = {
-    groomParents: ["", ""],
-    brideParents: ["", ""],
-    ninong: blanks(25),
-    ninang: blanks(25),
-    bestMan: [""],
-    maidOfHonor: [""],
-    candle: ["", ""],
-    veil: ["", ""],
-    cord: ["", ""],
-    groomsmen: blanks(7),
-    bridesmaids: blanks(7),
-    ringBearer: [""],
-    coinBearer: [""],
-    bibleBearer: [""],
-    flowerLadies: blanks(6)
+    groomParents: ["Mrs. Evelyn A. Samson"],
+    brideParents: ["Mr. Josezaldy G. Taghap"],
+    principalSponsors: [
+      "Ps. Giezelle Say-a & Ps. Adie Say-a",
+      "Ps. Liramay Obing & Ps. Herbert Obing",
+      "Ps. Cecille Custo & Ps. Sanny Custo",
+      "Ps. Melody F. Caballero & Ps. Armando Caballero",
+      "Mrs. Lesly Ann Mendoza & Mr. Frixus Mendoza",
+      "Mrs. Irish Valespin & Mr. Joemar Valespin",
+      "Mrs. Glaiza Caintic & Mr. John Carlo Caintic",
+      "Mrs. Castrence Abalos & Mr. Jose Christ Abalos",
+      "Mrs. Easter Melody Morano & Mr. Kenneth Winston Morano",
+      "Mrs. Jenirose G. Sabellano & Mr. Alex L. Sabellano",
+      "Ps. Avila & Mr. Avila",
+      "Mrs. Estrella Verano & Mr. Welito Verano",
+      "Mrs. Imelda S. Rapsing & Mr. Omer Rapsing",
+      "Mrs. Renalyn Bariquit & Mr. Lysinder Bariquit",
+      "Mrs. Vismanos & Mr. Vismanos",
+      "Mrs. Jinalyn Arizala & Mr. Jose Arizala",
+      "Mrs. Bebet & Mr. Bobby",
+      "Mrs. Nortega & Mr. Cromwel P. Nortega",
+      "Mrs. Marilou S. Real",
+      "Mrs. Robelyn R. Tiempo",
+      "Mrs. Chemverly C. Emalay & Mr. Rolly L. Emalay",
+      "Mr. Oscar Guiraldo",
+      "Mrs. Paglinawan & Mr. Dominador S. Paglinawan"
+    ],
+    secondarySponsors: [
+      { role: "Candle", note: "To light our path", names: "Levie Sanchez & Carlo Sanchez" },
+      { role: "Veil", note: "To clothe us as one", names: "Angelica Amora & Joniel Amora" },
+      { role: "Cord", note: "", names: "Jeremie Lacson & Yhong Lacson" }
+    ],
+    bestMan: ["Jisfir Cepriano"],
+    maidOfHonor: ["Ivy Rose Villanueva"],
+    groomsmen: ["Angelou Taghap", "Jhon Mark Parabas", "Adrian Jay Taghap", "Kalvin Bryce Pimentel", "Mac James Caneda", "Arjohn Taghap", "Ashley Mark Avila"],
+    bridesmaids: ["Rachel Langga", "Jodie Mae Cepriano", "Khim Macose", "Ahzlleah Grace Taghap", "Emelyn Salas", "Jewel Lou Senamin", "Jean Michelle"],
+    littleGroom: ["Matt2"],
+    littleBride: ["Zadie Say-a"],
+    bearers: [
+      { role: "Ring Bearer", names: "Joseph Emmanuel Ancheta" },
+      { role: "Bible Bearer", names: "Nelmar Carmelo" },
+      { role: "Coin Bearer", names: "King David Sanchez" }
+    ],
+    flowerLadies: ["Genzen Nojapa", "Sweety Mae Milar", "Ina Mae Carmelo", "Crisgen Paradero", "Princess Anne Solidor", "Cristine Senamin"]
   };
 
   // ---------- Theme artwork ----------
@@ -680,6 +735,24 @@
       var v = (vars[k] || "").trim();
       if (v) document.documentElement.style.setProperty(k, 'url("' + v.replace(/"/g, "%22") + '")');
     });
+  })();
+
+  // ---------- Parallax: the watercolor layer drifts up slower than the page ----------
+  (function () {
+    var layer = document.getElementById("parallax");
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var max = document.documentElement.scrollHeight - innerHeight;
+      var p = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
+      var travel = layer.offsetHeight - innerHeight;
+      layer.style.transform = "translate3d(0," + (-p * travel).toFixed(1) + "px,0)";
+    }
+    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+    addEventListener("scroll", onScroll, { passive: true });
+    addEventListener("resize", onScroll);
+    update();
   })();
 
   function loadInto(box, src, onFail) {
@@ -698,23 +771,25 @@
   (function () {
     var E = ENTOURAGE, root = document.getElementById("ent");
     function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
-    function li(name, ph) { return "<li>" + (name ? esc(name) : '<span class="ph">' + ph + "</span>") + "</li>"; }
-    function list(arr, ph) { return arr.map(function (n, i) { return li(n, ph + (arr.length > 1 ? " " + (i + 1) : "")); }).join(""); }
-    function pair(title, count, lLabel, lArr, lPh, rLabel, rArr, rPh) {
-      return '<div class="ent-group"><h3>' + title + "</h3>" + (count ? '<p class="count">' + count + "</p>" : "") +
-        '<div class="pair"><ol><li class="col-label">' + lLabel + "</li>" + list(lArr, lPh) + '</ol><ol><li class="col-label">' + rLabel + "</li>" + list(rArr, rPh) + "</ol></div></div>";
+    function items(arr) { return arr.map(function (n) { return "<li>" + esc(n) + "</li>"; }).join(""); }
+    function pair(title, lLabel, lArr, rLabel, rArr) {
+      return '<div class="ent-group"><h3>' + title + '</h3><div class="pair"><ol><li class="col-label">' + lLabel + "</li>" + items(lArr) +
+        '</ol><ol><li class="col-label">' + rLabel + "</li>" + items(rArr) + "</ol></div></div>";
     }
-    function one(label, arr, ph) {
-      return "<div><h4>" + label + "</h4>" + arr.map(function (n, i) { return "<p>" + (n ? esc(n) : '<span class="ph">' + ph + (arr.length > 1 ? " " + (i + 1) : "") + "</span>") + "</p>"; }).join("") + "</div>";
+    function roles(title, list) {
+      return '<div class="ent-group"><h3>' + title + '</h3><div class="roles">' + list.map(function (r) {
+        return "<div><h4>" + esc(r.role) + "</h4>" + (r.note ? '<p class="note">' + esc(r.note) + "</p>" : "") + "<p>" + esc(r.names) + "</p></div>";
+      }).join("") + "</div></div>";
     }
     var html = "";
-    html += pair("Parents", "", "Of the Groom", E.groomParents, "Groom's parent", "Of the Bride", E.brideParents, "Bride's parent");
-    html += pair("Principal Sponsors", (E.ninong.length + E.ninang.length) + " sponsors", "Ninong", E.ninong, "Ninong", "Ninang", E.ninang, "Ninang");
-    html += pair("Best Man &amp; Maid of Honor", "", "Best Man", E.bestMan, "Best Man", "Maid of Honor", E.maidOfHonor, "Maid of Honor");
-    html += '<div class="ent-group"><h3>Secondary Sponsors</h3><div class="roles">' + one("Candle", E.candle, "Sponsor") + one("Veil", E.veil, "Sponsor") + one("Cord", E.cord, "Sponsor") + "</div></div>";
-    html += pair("Groomsmen &amp; Bridesmaids", E.groomsmen.length + " pairs", "Groomsmen", E.groomsmen, "Groomsman", "Bridesmaids", E.bridesmaids, "Bridesmaid");
-    html += '<div class="ent-group"><h3>Bearers</h3><div class="roles">' + one("Ring", E.ringBearer, "Ring Bearer") + one("Coin", E.coinBearer, "Coin Bearer") + one("Bible", E.bibleBearer, "Bible Bearer") + "</div></div>";
-    html += '<div class="ent-group"><h3>Flower Ladies</h3><ul class="grid3">' + list(E.flowerLadies, "Flower Lady") + "</ul></div>";
+    html += pair("Parents", "Of the Groom", E.groomParents, "Of the Bride", E.brideParents);
+    html += '<div class="ent-group"><h3>Principal Sponsors</h3><ul class="sponsors">' + items(E.principalSponsors) + "</ul></div>";
+    html += roles("Secondary Sponsors", E.secondarySponsors);
+    html += pair("Best Man &amp; Maid of Honor", "Best Man", E.bestMan, "Maid of Honor", E.maidOfHonor);
+    html += pair("Groomsmen &amp; Bridesmaids", "Groomsmen", E.groomsmen, "Bridesmaids", E.bridesmaids);
+    html += pair("Little Groom &amp; Little Bride", "Little Groom", E.littleGroom, "Little Bride", E.littleBride);
+    html += roles("Bearers", E.bearers);
+    html += '<div class="ent-group"><h3>Flower Ladies</h3><ul class="grid3">' + items(E.flowerLadies) + "</ul></div>";
     root.innerHTML = html;
   })();
 
@@ -866,25 +941,53 @@
 
   // ---------- Background music: starts on the guest's first tap, button to pause ----------
   (function () {
-    var btn = document.getElementById("music-btn"), audio = document.getElementById("bg-music");
-    if (!MUSIC) return;
-    audio.src = MUSIC; audio.volume = .45;
-    var started = false;
+    var btn = document.getElementById("music-btn"), audio = document.getElementById("bg-music"), section = document.getElementById("music");
+    var player = null, ready = false, wantPlay = false;
     function setState(on) { btn.classList.toggle("playing", on); btn.setAttribute("aria-pressed", on ? "true" : "false"); }
-    function play() { var p = audio.play(); if (p && p.catch) p.catch(function () { setState(false); }); }
-    audio.addEventListener("play", function () { setState(true); });
-    audio.addEventListener("pause", function () { setState(false); });
-    audio.addEventListener("error", function () { btn.hidden = true; });
-    audio.addEventListener("loadedmetadata", function () { btn.hidden = false; });
-    audio.load();
-    btn.addEventListener("click", function (e) { e.stopPropagation(); started = true; if (audio.paused) play(); else audio.pause(); });
-    function firstTap() {
+    function isPlaying() { return player ? player.getPlayerState() === 1 : !audio.paused; }
+    function play() {
+      if (player) { if (ready) { player.setVolume(45); player.playVideo(); } else wantPlay = true; return; }
+      var p = audio.play(); if (p && p.catch) p.catch(function () { setState(false); });
+    }
+    function pause() { if (player) player.pauseVideo(); else audio.pause(); }
+    var started = false;
+    btn.addEventListener("click", function (e) { e.stopPropagation(); started = true; if (isPlaying()) pause(); else play(); });
+    function firstTap(e) {
+      if (e.target.closest && e.target.closest("#music-btn")) return;
       document.removeEventListener("pointerdown", firstTap);
       document.removeEventListener("keydown", firstTap);
       if (!started) { started = true; play(); }
     }
-    document.addEventListener("pointerdown", firstTap);
-    document.addEventListener("keydown", firstTap);
+    function listen() { document.addEventListener("pointerdown", firstTap); document.addEventListener("keydown", firstTap); }
+
+    if (MUSIC.mp3) {
+      audio.src = MUSIC.mp3; audio.volume = .45;
+      audio.addEventListener("play", function () { setState(true); });
+      audio.addEventListener("pause", function () { setState(false); });
+      audio.addEventListener("error", function () { btn.hidden = true; });
+      audio.addEventListener("loadedmetadata", function () { btn.hidden = false; });
+      audio.load(); listen();
+      return;
+    }
+    if (!MUSIC.youtube) return;
+    document.getElementById("yt-artist").textContent = MUSIC.artist || "the artist";
+    if (MUSIC.title) section.querySelector("h2").textContent = MUSIC.title;
+    window.onYouTubeIframeAPIReady = function () {
+      section.hidden = false;
+      player = new YT.Player("yt-player", {
+        videoId: MUSIC.youtube,
+        playerVars: { rel: 0, playsinline: 1, loop: 1, playlist: MUSIC.youtube },
+        events: {
+          onReady: function () { ready = true; btn.hidden = false; if (wantPlay) play(); },
+          onStateChange: function (ev) { setState(ev.data === 1); }
+        }
+      });
+    };
+    var s = document.createElement("script");
+    s.src = "https://www.youtube.com/iframe_api";
+    s.onerror = function () { section.hidden = true; btn.hidden = true; };
+    document.head.appendChild(s);
+    listen();
   })();
 
   // ---------- RSVP: builds a reply the guest can copy and send ----------
