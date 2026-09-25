@@ -179,7 +179,11 @@
   .map-meta { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px; padding: 16px 6px 4px; }
   .map-meta p { margin: 0; }
   .map-meta strong { font-family: var(--caps); font-weight: 500; font-size: .85rem; letter-spacing: .14em; color: var(--navy); display: block; }
-  .map-meta span { color: var(--muted); font-size: 1.05rem; }
+  .map-meta span { color: var(--muted); font-size: .95rem; display: block; }
+  .map-meta .pluscode { font-size: .82rem; letter-spacing: .04em; }
+  .venue-photo { margin: 0 0 14px; position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--wash); }
+  .venue-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .venue-photo figcaption { position: absolute; left: 12px; bottom: 10px; background: rgba(255,254,251,.92); border: 1px solid var(--gold-light); padding: 4px 12px; font-family: var(--caps); font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--navy); }
   .btns { display: flex; flex-wrap: wrap; gap: 10px; }
 
   .btn { font-weight: 600;
@@ -216,6 +220,8 @@
   .sponsors { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 8px 14px; max-width: 720px; margin: 0 auto; line-height: 1.4; font-size: .95rem; align-items: baseline; }
   .sponsors .sp-l { text-align: right; }
   .sponsors .sp-r { text-align: left; }
+  .sponsors .sp-single { grid-column: 1 / -1; text-align: center; }
+  .sponsors .sp-r + .sp-single { margin-top: 10px; padding-top: 12px; border-top: 1px solid var(--champagne); }
   .sponsors .sp-amp { font-family: var(--script); font-size: 1.25rem; color: var(--gold); line-height: 1; }
   .roles .note { font-style: italic; color: var(--muted); font-size: .88rem; margin: -2px 0 4px; }
   .ent-group li, .ent-group p { font-size: .95rem; }
@@ -311,10 +317,9 @@
   footer .names { font-size: clamp(2.4rem, 9vw, 3.2rem); }
   footer .small-caps { color: #9A7A40; font-size: .78rem; margin-top: 12px; }
 
-  /* Wedding music: YouTube player, kept visible on the page */
-  .yt-frame { max-width: 560px; margin: 0 auto; aspect-ratio: 16 / 9; padding: 8px; background: var(--paper); border: 1px solid var(--gold-light); box-shadow: 0 22px 40px -26px rgba(27, 46, 92, .5); }
-  .yt-frame iframe, #yt-player { width: 100%; height: 100%; display: block; border: 0; }
-  .yt-credit { text-align: center; color: var(--muted); font-size: .9rem; margin: 14px auto 0; max-width: 46ch; }
+  /* Wedding music: the YouTube player sits out of sight; the music button controls it */
+  .yt-hidden { position: fixed; left: 0; bottom: 0; width: 2px; height: 2px; opacity: .01; overflow: hidden; pointer-events: none; z-index: -2; }
+  .yt-hidden iframe { width: 2px; height: 2px; border: 0; }
 
   /* Background music button */
   .music {
@@ -372,7 +377,6 @@
   <ul>
     <li><a href="#invite">Invitation</a></li>
     <li><a href="#countdown">Countdown</a></li>
-    <li><a href="#music">Music</a></li>
     <li><a href="#details">Details</a></li>
     <li><a href="#map">Map</a></li>
     <li><a href="#entourage">Entourage</a></li>
@@ -421,18 +425,6 @@
     </div>
   </section>
 
-  <section class="band" id="music" hidden>
-    <div class="inner">
-      <div class="sec-head">
-        <p class="small-caps">Our wedding music</p>
-        <h2>Blessed Assurance</h2>
-        <div class="divider"><i></i></div>
-      </div>
-      <div class="yt-frame"><div id="yt-player"></div></div>
-      <p class="yt-credit">Piano instrumental by <span id="yt-artist">Kaleb Brasee</span>, played from YouTube. Tap the music button any time to pause.</p>
-    </div>
-  </section>
-
   <section class="band" id="details">
     <div class="inner">
       <div class="sec-head">
@@ -467,12 +459,13 @@
         <div class="divider"><i></i></div>
       </div>
       <div class="panel map-card">
+        <figure class="venue-photo" id="venue-photo" hidden><figcaption>LJ Mega Convention</figcaption></figure>
         <div class="map-frame" id="map-frame">
           <canvas id="map-art" aria-hidden="true"></canvas>
           <span class="pin-label">LJ Mega Convention</span>
         </div>
         <div class="map-meta">
-          <p><strong>LJ MEGA CONVENTION</strong><span>Butuan City, Agusan del Norte</span></p>
+          <p><strong>LJ MEGA CONVENTION</strong><span>Gumamela Street, Butuan City, Agusan del Norte</span><span class="pluscode">Plus code: WGPQ+C77</span></p>
           <div class="btns">
             <a class="btn" id="gmaps-link" target="_blank" rel="noopener">Open in Google Maps</a>
             <a class="btn line" id="waze-link" target="_blank" rel="noopener">Open in Waze</a>
@@ -579,7 +572,7 @@
         <div class="corner tl" aria-hidden="true"></div>
         <div class="corner br" aria-hidden="true"></div>
         <div class="content">
-          <p class="small-caps">Répondez s'il vous plaît</p>
+          <p class="small-caps">Please respond</p>
           <h2 class="names">Kindly Reply</h2>
           <p class="intro">Please let us know by 1 October 2026. We've reserved seats in your honor.</p>
 
@@ -640,6 +633,8 @@
   <span class="label"><span class="label-play">Play music</span><span class="label-pause">Pause music</span></span>
 </button>
 <audio id="bg-music" loop preload="metadata"></audio>
+<!-- the YouTube player plays the background music out of sight -->
+<div class="yt-hidden" aria-hidden="true"><div id="yt-player"></div></div>
 
 <script>
   /* =====================================================================
@@ -672,14 +667,17 @@
       { src: "photos/couple.jpg", pos: "50% 62%", zoom: 1.45 },
       { src: "photos/couple.jpg", pos: "50% 80%", zoom: 1.25 }
     ],
-    map: ""
+    map: "",
+    /* venue: a photo of LJ Mega Convention, e.g. "photos/venue.jpg". Leave "" to hide the photo. */
+    venue: ""
   };
   /* MUSIC: background music. "youtube" is a YouTube video id (the part after "watch?v=").
      "mp3" is an optional MP3 in the "music" folder; when set it is used instead of YouTube.
      The YouTube player only works on the live site, not inside the claude.ai preview. */
   var MUSIC = { youtube: "HwUzA6I8_U4", artist: "Kaleb Brasee", title: "Blessed Assurance", mp3: "" };
   var MAP_EMBED = "auto";
-  var VENUE_QUERY = "LJ Mega Convention, Butuan City";
+  /* Venue: plus code WGPQ+C77, Gumamela Street, Butuan City */
+  var VENUE = { lat: 8.936038, lng: 125.538172, plus: "WGPQ+C77 Butuan City" };
   var RSVP_CONTACT = "Norman at 0950 564 4255";
 
   /* ENTOURAGE: edit the names between the quotes. */
@@ -703,13 +701,14 @@
       "Mrs. Renalyn Bariquit & Mr. Lysinder Bariquit",
       "Mrs. Vismanos & Mr. Vismanos",
       "Mrs. Jinalyn Arizala & Mr. Jose Arizala",
-      "Mrs. Bebet & Mr. Bobby",
-      "Mrs. Nortega & Mr. Cromwel P. Nortega",
+      "Mrs. Lonie M. Garrido & Mr. Bobby Garrido",
+      "Mrs. Rocheil T. Nortega & Mr. Cromwell P. Nortega",
+      "Mrs. Chemverly C. Emalay & Mr. Rolly L. Emalay",
+      "Mrs. Paglinawan & Mr. Dominador S. Paglinawan",
+      // listed on their own, after all the couples
       "Mrs. Marilou S. Real",
       "Mrs. Robelyn R. Tiempo",
-      "Mrs. Chemverly C. Emalay & Mr. Rolly L. Emalay",
-      "Mr. Oscar Guiraldo",
-      "Mrs. Paglinawan & Mr. Dominador S. Paglinawan"
+      "Mr. Oscar Guiraldo"
     ],
     secondarySponsors: [
       { role: "Candle", note: "To light our path", names: "Levie Sanchez & Carlo Sanchez" },
@@ -780,7 +779,7 @@
     function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
     function items(arr) { return arr.map(function (n) { return "<li>" + esc(n) + "</li>"; }).join(""); }
     function pair(title, lLabel, lArr, rLabel, rArr) {
-      return '<div class="ent-group"><h3>' + title + '</h3><div class="pair"><ol><li class="col-label">' + lLabel + "</li>" + items(lArr) +
+      return '<div class="ent-group">' + (title ? '<h3>' + title + '</h3>' : '') + '<div class="pair"><ol><li class="col-label">' + lLabel + "</li>" + items(lArr) +
         '</ol><ol><li class="col-label">' + rLabel + "</li>" + items(rArr) + "</ol></div></div>";
     }
     function roles(title, list) {
@@ -793,13 +792,13 @@
     // one couple per row: wife on the left, husband on the right, the "&" lined up in the middle
     html += '<div class="ent-group"><h3>Principal Sponsors</h3><div class="sponsors">' + E.principalSponsors.map(function (line) {
       var parts = line.split(/\s+&\s+/), l = parts[0], r = parts[1] || "";
-      if (parts.length === 1 && /^Mr\.? /.test(l)) { r = l; l = ""; }
+      if (parts.length === 1) return '<span class="sp-single">' + esc(l) + "</span>";
       return '<span class="sp-l">' + esc(l) + '</span><span class="sp-amp">' + (l && r ? "&amp;" : "") + '</span><span class="sp-r">' + esc(r) + "</span>";
     }).join("") + "</div></div>";
     html += roles("Secondary Sponsors", E.secondarySponsors);
-    html += pair("Best Man &amp; Maid of Honor", "Best Man", E.bestMan, "Maid of Honor", E.maidOfHonor);
-    html += pair("Groomsmen &amp; Bridesmaids", "Groomsmen", E.groomsmen, "Bridesmaids", E.bridesmaids);
-    html += pair("Little Groom &amp; Little Bride", "Little Groom", E.littleGroom, "Little Bride", E.littleBride);
+    html += pair("", "Best Man", E.bestMan, "Maid of Honor", E.maidOfHonor);
+    html += pair("", "Groomsmen", E.groomsmen, "Bridesmaids", E.bridesmaids);
+    html += pair("", "Little Groom", E.littleGroom, "Little Bride", E.littleBride);
     html += roles("Bearers", E.bearers);
     html += '<div class="ent-group"><h3>Flower Ladies</h3><ul class="grid3">' + items(E.flowerLadies) + "</ul></div>";
     root.innerHTML = html;
@@ -881,18 +880,27 @@
     go(0); restart();
   })();
 
+  // ---------- Venue photo (shown only once a photo is set) ----------
+  (function () {
+    var box = document.getElementById("venue-photo"), src = (IMAGES.venue || "").trim();
+    if (!src) return;
+    var img = new Image(); img.alt = "LJ Mega Convention, Butuan City";
+    img.onload = function () { box.hidden = false; };
+    img.src = src; box.prepend(img);
+  })();
+
   // ---------- Map ----------
   (function () {
-    var q = encodeURIComponent(VENUE_QUERY);
-    document.getElementById("gmaps-link").href = "https://www.google.com/maps/search/?api=1&query=" + q;
-    document.getElementById("waze-link").href = "https://waze.com/ul?q=" + q + "&navigate=yes";
+    var ll = VENUE.lat + "," + VENUE.lng, q = encodeURIComponent(ll);
+    document.getElementById("gmaps-link").href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(VENUE.plus);
+    document.getElementById("waze-link").href = "https://waze.com/ul?ll=" + q + "&navigate=yes";
     var frame = document.getElementById("map-frame");
     var mapSrc = (IMAGES.map || "").trim();
     var host = location.hostname;
     var embed = MAP_EMBED === true || (MAP_EMBED === "auto" && /(\.github\.io|\.netlify\.app|\.vercel\.app)$/.test(host));
     if (embed) {
       var f = document.createElement("iframe");
-      f.src = "https://www.google.com/maps?q=" + q + "&output=embed";
+      f.src = "https://www.google.com/maps?q=" + q + "&z=17&output=embed";
       f.title = "Map to LJ Mega Convention"; f.loading = "lazy";
       frame.appendChild(f); frame.classList.add("has-map");
       return;
@@ -953,7 +961,7 @@
 
   // ---------- Background music: starts on the guest's first tap, button to pause ----------
   (function () {
-    var btn = document.getElementById("music-btn"), audio = document.getElementById("bg-music"), section = document.getElementById("music");
+    var btn = document.getElementById("music-btn"), audio = document.getElementById("bg-music");
     var player = null, ready = false, wantPlay = false;
     function setState(on) { btn.classList.toggle("playing", on); btn.setAttribute("aria-pressed", on ? "true" : "false"); }
     function isPlaying() { return player ? player.getPlayerState() === 1 : !audio.paused; }
@@ -982,10 +990,8 @@
       return;
     }
     if (!MUSIC.youtube) return;
-    document.getElementById("yt-artist").textContent = MUSIC.artist || "the artist";
-    if (MUSIC.title) section.querySelector("h2").textContent = MUSIC.title;
     window.onYouTubeIframeAPIReady = function () {
-      section.hidden = false;
+
       player = new YT.Player("yt-player", {
         videoId: MUSIC.youtube,
         playerVars: { rel: 0, playsinline: 1, loop: 1, playlist: MUSIC.youtube },
@@ -997,7 +1003,7 @@
     };
     var s = document.createElement("script");
     s.src = "https://www.youtube.com/iframe_api";
-    s.onerror = function () { section.hidden = true; btn.hidden = true; };
+    s.onerror = function () { btn.hidden = true; };
     document.head.appendChild(s);
     listen();
   })();
