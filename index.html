@@ -82,7 +82,10 @@
   /* Invitation card: the blush hexagon artwork with the couple photo inside its gold frame */
   .invite { width: min(100%, 580px); margin-top: 36px; aspect-ratio: 1414 / 2000; box-shadow: 0 34px 70px -36px rgba(27, 46, 92, .45); }
   .invite .bg { background: #FBF3F1 var(--img-card-blush) center / 100% 100% no-repeat; }
-  .invite .slot { --l: 11%; --t: 13%; --w: 78%; --h: 70%; gap: 1.1cqw; }
+  .invite .slot { --l: 11%; --t: 11%; --w: 78%; --h: 74%; gap: 1cqw; }
+  /* arch-shaped couple photo at the top of the card */
+  .invite .card-arch { width: 30cqw; padding: .9cqw; border: 1px solid var(--gold); border-radius: 999px 999px 4px 4px; background: rgba(255,255,255,.6); margin-bottom: 1.6cqw; box-shadow: 0 1.6cqw 3.2cqw -1.8cqw rgba(27,46,92,.5); }
+  .invite .card-arch .arch-photo { aspect-ratio: 3 / 4; }
   .invite .slot > * { flex-shrink: 0; }
   .invite .couple {
     width: 24cqw; height: 24cqw; border-radius: 50%; overflow: hidden; position: relative; margin-block: 1.2cqw 1.6cqw;
@@ -100,14 +103,9 @@
   .invite .to-follow { font-size: clamp(18px, 5cqw, 29px); margin-top: 1.4cqw; }
 
   /* Hero: a tall arch-shaped photo of the couple, like an arched invitation card */
-  .hero-arch { position: relative; width: min(100%, 440px); margin: 34px auto 0; text-align: center; }
-  .arch-text { display: block; width: 100%; height: auto; margin-bottom: -15%; overflow: visible; }
-  .arch-text text { font-family: var(--caps); font-size: 13px; font-weight: 600; letter-spacing: 3.2px; fill: var(--navy); }
-  .arch-frame { position: relative; width: 84%; margin: 0 auto; padding: 10px; border: 1px solid var(--gold); border-radius: 999px 999px 8px 8px; background: rgba(255, 254, 251, .7); box-shadow: 0 30px 60px -34px rgba(27, 46, 92, .5); }
+
   .arch-photo { position: relative; aspect-ratio: 2 / 3; border-radius: 999px 999px 4px 4px; overflow: hidden; background: linear-gradient(160deg, var(--wash), var(--beige)); }
   .arch-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
-  .arch-date { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 18px 0 0; font-family: var(--caps); font-size: 1.5rem; color: var(--navy); letter-spacing: .08em; }
-  .arch-date i { width: 1px; height: 26px; background: var(--gold); }
   /* Blue flower wreath (square crop of the artwork) */
   .wreath-blue { width: min(100%, 460px); aspect-ratio: 1; }
   .wreath-blue .bg { background-image: var(--img-wreath-blue); background-size: 100% auto; background-position: 50% 48%; }
@@ -378,7 +376,8 @@
     .sponsors { font-size: .68rem; gap: 7px 4px; }
     .nav a { font-size: .72rem; }
     /* smallest phones: tighten the invitation and dress-code text so it stays inside the artwork frames */
-    .invite .slot { --t: 12%; --h: 73%; gap: .6cqw; }
+    .invite .slot { --t: 10%; --h: 76%; gap: .5cqw; }
+    .invite .card-arch { width: 27cqw; margin-bottom: 1cqw; }
     .invite .couple { width: 21cqw; height: 21cqw; margin-block: .8cqw 1.2cqw; }
     .invite .small-caps { font-size: 8.5px; line-height: 1.55; }
     .invite .names { font-size: 24px; }
@@ -420,17 +419,10 @@
   </ul>
 </nav>
 
-<section class="hero-arch" aria-label="Norman and Angenith">
-  <svg class="arch-text" viewBox="0 0 400 210" aria-hidden="true"><path id="archPath" d="M 22 200 A 178 178 0 0 1 378 200" fill="none"/><text><textPath href="#archPath" startOffset="50%" text-anchor="middle">WE CAN&#8217;T WAIT TO CELEBRATE WITH YOU</textPath></text></svg>
-  <div class="arch-frame">
-    <div class="arch-photo" id="hero-photo"></div>
-  </div>
-  <p class="arch-date"><span>10</span><i></i><span>31</span><i></i><span>26</span></p>
-</section>
-
 <header class="art invite" id="invite">
   <div class="bg" aria-hidden="true"></div>
   <div class="slot">
+    <div class="card-arch"><div class="arch-photo" id="hero-photo"></div></div>
     <p class="small-caps">Together with their families</p>
     <h1 class="names">Norman<span class="amp">&amp;</span>Angenith</h1>
     <p class="small-caps">request the pleasure of your company<br>at the celebration of their marriage</p>
