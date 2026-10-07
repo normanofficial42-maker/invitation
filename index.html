@@ -109,7 +109,7 @@
   .hexagon { width: min(100%, 470px); aspect-ratio: 1414 / 2000; }
   .hexagon .bg { background-image: var(--img-hexagon); background-size: 100% 100%; }
   /* centered on the middle of the gold hexagon, clear of both rose clusters */
-  .hexagon .slot { --l: 23%; --t: 32%; --w: 52%; --h: 34%; }
+  .hexagon .slot { --l: 23%; --t: 31%; --w: 52%; --h: 37%; }
 
   /* ---------- Sections ---------- */
   .band { position: relative; margin-inline: -16px; padding: 84px 16px 90px; scroll-margin-top: 50px; overflow: hidden; }
@@ -217,14 +217,12 @@
   .roles h4 { font-family: var(--caps); font-weight: 600; font-size: .76rem; letter-spacing: .1em; text-transform: uppercase; color: var(--blue); margin: 0 0 6px; }
   .roles p { margin: 0; }
   .ph { color: var(--muted); font-style: italic; }
-  .sponsors { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 8px 14px; max-width: 720px; margin: 0 auto; line-height: 1.4; font-size: .95rem; align-items: baseline; }
+  .sponsors { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 6px 12px; max-width: 720px; margin: 0 auto; line-height: 1.4; font-size: .86rem; align-items: baseline; }
   .sponsors .sp-l { text-align: right; }
   .sponsors .sp-r { text-align: left; }
-  .sponsors .sp-single { grid-column: 1 / -1; text-align: center; }
-  .sponsors .sp-r + .sp-single { margin-top: 10px; padding-top: 12px; border-top: 1px solid var(--champagne); }
   .sponsors .sp-amp { font-family: var(--script); font-size: 1.25rem; color: var(--gold); line-height: 1; }
   .roles .note { font-style: italic; color: var(--muted); font-size: .88rem; margin: -2px 0 4px; }
-  .ent-group li, .ent-group p { font-size: .95rem; }
+  .ent-group li, .ent-group p { font-size: .86rem; line-height: 1.5; }
 
   /* Attire, centered inside the hexagon */
   .attire-title { font-family: var(--caps); font-size: clamp(13px, 4cqw, 19px); font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--navy); margin: 0 0 1cqw; white-space: nowrap; }
@@ -258,8 +256,8 @@
   }
   .arrow:hover { background: var(--navy); color: var(--paper); }
   .arrow.prev { left: 4px; } .arrow.next { right: 4px; }
-  .dots { display: flex; justify-content: center; gap: 10px; padding-top: 34px; }
-  .dots button { width: 9px; height: 9px; padding: 0; border: 1px solid var(--gold); background: transparent; transform: rotate(45deg); cursor: pointer; }
+  .dots { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding-top: 34px; max-width: 360px; margin: 0 auto; }
+  .dots button { width: 8px; height: 8px; padding: 0; border: 1px solid var(--gold); background: transparent; transform: rotate(45deg); cursor: pointer; }
   .dots button[aria-current="true"] { background: var(--gold); }
 
   /* Monetary gift */
@@ -347,16 +345,39 @@
     .band { padding-block: 80px 90px; }
     .corner { width: 150px; }
     .spray { width: 84px; opacity: .9; }
-    .pair { gap: 0 16px; font-size: 1.05rem; }
+    .ent { padding-inline: 12px; }
+    .pair { gap: 0 12px; }
+    .ent-group li, .ent-group p { font-size: .78rem; }
+    .col-label, .roles h4 { font-size: .66rem; letter-spacing: .06em; }
+    .sponsors .sp-amp { font-size: 1rem; }
     .grid3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .roles { grid-template-columns: 1fr; }
-    .sponsors { gap: 10px 8px; font-size: .84rem; }
+    .sponsors { gap: 8px 6px; font-size: .74rem; }
     .arrow { width: 36px; height: 36px; }
     .arrow.prev { left: 0; } .arrow.next { right: 0; }
     .map-frame { aspect-ratio: 4 / 3; }
     .ent-wrap .bouquet { width: 110px; }
     .ent-wrap .bouquet.left { left: -30px; top: -80px; }
     .ent-wrap .bouquet.right { right: -30px; bottom: -80px; }
+  }
+  @media (max-width: 380px) {
+    .ent-group li, .ent-group p { font-size: .72rem; }
+    .sponsors { font-size: .68rem; gap: 7px 4px; }
+    .nav a { font-size: .72rem; }
+    /* smallest phones: tighten the invitation and dress-code text so it stays inside the artwork frames */
+    .invite .slot { --t: 12%; --h: 73%; gap: .6cqw; }
+    .invite .couple { width: 21cqw; height: 21cqw; margin-block: .8cqw 1.2cqw; }
+    .invite .small-caps { font-size: 8.5px; line-height: 1.55; }
+    .invite .names { font-size: 24px; }
+    .invite .rule { margin: 1cqw auto; }
+    .invite .when { font-size: 9px; line-height: 1.6; }
+    .invite .where { font-size: 8.5px; line-height: 1.55; }
+    .invite .to-follow { font-size: 15px; margin-top: 1cqw; }
+    .hexagon .slot { --t: 29%; --h: 40%; }
+    .attire-title { font-size: 11px; }
+    .attire-note { font-size: 10px; margin-bottom: 2cqw; }
+    .swatch { font-size: 8px; }
+    .swatch i { width: 20px; }
   }
 </style>
 </head>
@@ -650,7 +671,10 @@
                 GitHub Pages, Netlify or Vercel. true = always, false = never.
      ===================================================================== */
   var IMAGES = {
-    couple:      "photos/couple.jpg",
+    couple:      "photos/gallery-14.jpg",
+    couplePos:   "50% 21%",   /* which part of the photo the round frame shows */
+    coupleZoom:  1.45,
+    coupleZoomAt: "60% 50%",  /* the point the zoom centers on */
     wash:        "photos/wash.webp",
     wreathGold:  "photos/wreath-gold.webp",
     wreathBlue:  "photos/wreath-blue.webp",
@@ -661,11 +685,41 @@
     cardBlush:   "photos/card-blush.webp",
     spray:       "photos/side-spray.webp",
     slides: [
-      { src: "photos/couple.jpg" },
-      { src: "photos/couple.jpg", pos: "50% 47%", zoom: 2.1 },
-      { src: "photos/couple.jpg", pos: "50% 18%", zoom: 1.35 },
-      { src: "photos/couple.jpg", pos: "50% 62%", zoom: 1.45 },
-      { src: "photos/couple.jpg", pos: "50% 80%", zoom: 1.25 }
+      { src: "photos/gallery-01.jpg" },
+      { src: "photos/gallery-02.jpg" },
+      { src: "photos/gallery-03.jpg", pos: "54% 50%" },
+      { src: "photos/gallery-04.jpg", pos: "50% 50%" },
+      { src: "photos/gallery-05.jpg" },
+      { src: "photos/gallery-06.jpg" },
+      { src: "photos/gallery-07.jpg" },
+      { src: "photos/gallery-08.jpg" },
+      { src: "photos/gallery-09.jpg", pos: "52% 50%" },
+      { src: "photos/gallery-10.jpg", pos: "60% 50%" },
+      { src: "photos/gallery-11.jpg", pos: "57% 50%" },
+      { src: "photos/gallery-12.jpg", pos: "50% 50%" },
+      { src: "photos/gallery-13.jpg", pos: "62% 50%" },
+      { src: "photos/gallery-14.jpg" },
+      { src: "photos/gallery-15.jpg" },
+      { src: "photos/gallery-16.jpg" },
+      { src: "photos/gallery-17.jpg" },
+      { src: "photos/gallery-18.jpg" },
+      { src: "photos/gallery-19.jpg" },
+      { src: "photos/gallery-20.jpg", pos: "72% 50%" },
+      { src: "photos/gallery-21.jpg", pos: "58% 50%" },
+      { src: "photos/gallery-22.jpg", pos: "55% 50%" },
+      { src: "photos/gallery-23.jpg", pos: "66% 50%" },
+      { src: "photos/gallery-24.jpg", pos: "62% 50%" },
+      { src: "photos/gallery-25.jpg", pos: "57% 50%" },
+      { src: "photos/gallery-26.jpg", pos: "53% 50%" },
+      { src: "photos/gallery-27.jpg", pos: "50% 60%" },
+      { src: "photos/gallery-28.jpg", pos: "52% 50%" },
+      { src: "photos/gallery-29.jpg", pos: "25% 50%" },
+      { src: "photos/gallery-30.jpg", pos: "50% 55%" },
+      { src: "photos/gallery-31.jpg", pos: "33% 50%" },
+      { src: "photos/gallery-32.jpg", pos: "50% 60%" },
+      { src: "photos/gallery-33.jpg", pos: "62% 50%" },
+      { src: "photos/gallery-34.jpg" },
+      { src: "photos/gallery-35.jpg", pos: "70% 50%" }
     ],
     map: "",
     /* venue: a photo of LJ Mega Convention, e.g. "photos/venue.jpg". Leave "" to hide the photo. */
@@ -685,30 +739,32 @@
     groomParents: ["Mrs. Evelyn A. Samson"],
     brideParents: ["Mr. Josezaldy G. Taghap"],
     principalSponsors: [
-      "Ps. Giezelle Say-a & Ps. Adie Say-a",
-      "Ps. Liramay Obing & Ps. Herbert Obing",
-      "Ps. Cecille Custo & Ps. Sanny Custo",
+      "Ps. Giezyl Mae L. Say-a & Ps. Adie Say-a",
+      "Ps. Cecille R. Custo & Ps. Sanny A. Custo",
       "Ps. Melody F. Caballero & Ps. Armando Caballero",
-      "Mrs. Lesly Ann Mendoza & Mr. Frixus Mendoza",
-      "Mrs. Irish Valespin & Mr. Joemar Valespin",
-      "Mrs. Glaiza Caintic & Mr. John Carlo Caintic",
-      "Mrs. Castrence Abalos & Mr. Jose Christ Abalos",
-      "Mrs. Easter Melody Morano & Mr. Kenneth Winston Morano",
+      "Ps. Liramay P. Obing & Ps. Herbert L. Obing",
+      "Ps. Fransicora P. Avila & Ps. Lolito C. Avila Sr.",
+      "Mrs. Maricor Honculada & Mr. Jeffrey Honculada",
+      "Mrs. Girlie S. Oliver & Mr. Eroll Jake R. Oliver",
+      "Mrs. Glaiza M. Caintic & Mr. John Carlo J. Caintic",
+      "Mrs. Rocheil T. Nortega & Hon. Cromwell P. Nortega",
+      "Mrs. Renalyn L. Bariquit & Mr. Lysinder A. Bariquit",
+      "Mrs. Lesly Ann B. Mendoza & Mr. Frixus Mendoza",
+      "Mrs. Irish H. Valespin & Mr. Joemar Valespin",
+      "Eng. Castrence C. Abalos & Eng. Jose Christ R. Abalos",
+      "Mrs. Easter Melody P. Morano & Mr. Kenneth Winston D. Morano",
       "Mrs. Jenirose G. Sabellano & Mr. Alex L. Sabellano",
-      "Ps. Avila & Mr. Avila",
-      "Mrs. Estrella Verano & Mr. Welito Verano",
-      "Mrs. Imelda S. Rapsing & Mr. Omer Rapsing",
-      "Mrs. Renalyn Bariquit & Mr. Lysinder Bariquit",
-      "Mrs. Vismanos & Mr. Vismanos",
-      "Mrs. Jinalyn Arizala & Mr. Jose Arizala",
-      "Mrs. Lonie M. Garrido & Mr. Bobby Garrido",
-      "Mrs. Rocheil T. Nortega & Mr. Cromwell P. Nortega",
-      "Mrs. Chemverly C. Emalay & Mr. Rolly L. Emalay",
-      "Mrs. Paglinawan & Mr. Dominador S. Paglinawan",
-      // listed on their own, after all the couples
+      "Mrs. Jinalyn G. Arizala & Mr. Jose S. Arizala",
       "Mrs. Marilou S. Real",
+      "Mrs. Imelda S. Rapsing & Mr. Omer Rapsing",
+      "Mrs. Riza Vismanos & Mr. Lorden Vismanos",
+      "Mrs. Estrella S. Verano & Mr. Welito B. Verano",
+      "Mrs. Lonie M. Garrido & Mr. Bobby Garrido",
+      "Mrs. Chemverly C. Emalay & Mr. Rolly L. Emalay",
       "Mrs. Robelyn R. Tiempo",
-      "Mr. Oscar Guiraldo"
+      // listed on their own in the right-hand column
+      "Hon. Oscar Guiraldo",
+      "Mr. Dominador S. Paglinawan"
     ],
     secondarySponsors: [
       { role: "Candle", note: "To light our path", names: "Levie Sanchez & Carlo Sanchez" },
@@ -717,14 +773,14 @@
     ],
     bestMan: ["Jisfir Cepriano"],
     maidOfHonor: ["Ivy Rose Villanueva"],
-    groomsmen: ["Angelou Taghap", "Jhon Mark Parabas", "Adrian Jay Taghap", "Kalvin Bryce Pimentel", "Mac James Caneda", "Arjohn Taghap", "Ashley Mark Avila"],
-    bridesmaids: ["Rachel Langga", "Jodie Mae Cepriano", "Khim Macose", "Ahzlleah Grace Taghap", "Emelyn Salas", "Jewel Lou Senamin", "Jean Michelle"],
+    groomsmen: ["Angelou-rex V. Taghap", "Jhon Mark Parabas", "Adrian Jay V. Taghap", "Kalvin Bryce Pimentel", "Charles Vincent P. Cañeda", "Arjohn V. Taghap", "Ashley Mark Avila"],
+    bridesmaids: ["Rachel Q. Langga", "Jodiemae C. Ombaugan", "Khimberlie Macose", "Ahzlleah Grace V. Taghap", "Emelyn Salas", "Jewel Lou Senamin", "Jean Michelle S. Verano"],
     littleGroom: ["Matteo Chen R. Custo"],
     littleBride: ["Zadie Say-a"],
     bearers: [
-      { role: "Ring Bearer", names: "Joseph Emmanuel Ancheta" },
-      { role: "Bible Bearer", names: "Nelmar Carmelo" },
-      { role: "Coin Bearer", names: "King David Sanchez" }
+      { role: "Ring Bearer", names: "Joseph David Emmanuel A. Ancheta" },
+      { role: "Bible Bearer", names: "Nelmar P. Carmelo" },
+      { role: "Coin Bearer", names: "King David A. Sanchez" }
     ],
     flowerLadies: ["Genzen Nojapa", "Sweety Mae Milar", "Ina Mae Carmelo", "Crisgen Paradero", "Princess Anne Solidor", "Cristine Senamin"]
   };
@@ -771,7 +827,13 @@
   }
 
   // ---------- Couple photo on the invitation card ----------
-  loadInto(document.getElementById("hero-photo"), IMAGES.couple);
+  (function () {
+    var box = document.getElementById("hero-photo");
+    loadInto(box, IMAGES.couple);
+    var img = box.querySelector("img");
+    if (img && IMAGES.couplePos) { img.style.objectPosition = IMAGES.couplePos; img.style.transformOrigin = IMAGES.coupleZoomAt || "50% 50%"; }
+    if (img && IMAGES.coupleZoom) img.style.transform = "scale(" + IMAGES.coupleZoom + ")";
+  })();
 
   // ---------- Entourage ----------
   (function () {
@@ -792,7 +854,8 @@
     // one couple per row: wife on the left, husband on the right, the "&" lined up in the middle
     html += '<div class="ent-group"><h3>Principal Sponsors</h3><div class="sponsors">' + E.principalSponsors.map(function (line) {
       var parts = line.split(/\s+&\s+/), l = parts[0], r = parts[1] || "";
-      if (parts.length === 1) return '<span class="sp-single">' + esc(l) + "</span>";
+      // a sponsor listed alone sits in their own column: ladies left, gentlemen right
+      if (parts.length === 1 && /^(Mr|Hon|Engr?|Atty|Dr)\.? /.test(l)) { r = l; l = ""; }
       return '<span class="sp-l">' + esc(l) + '</span><span class="sp-amp">' + (l && r ? "&amp;" : "") + '</span><span class="sp-r">' + esc(r) + "</span>";
     }).join("") + "</div></div>";
     html += roles("Secondary Sponsors", E.secondarySponsors);
