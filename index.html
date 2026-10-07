@@ -125,6 +125,12 @@
   .band.has-photo { padding-top: 0; }
   .sec-photo { position: relative; z-index: 1; margin: 0 -16px 34px; height: clamp(260px, 56vw, 560px); -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 100%); mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 100%); }
   .sec-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  /* narrowed photos (tall photo, wide screen) fade into the page on the sides too */
+  img.narrow { -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+  .sec-photo { overflow: hidden; }
+  .sec-photo img.narrow { position: relative; z-index: 1; }
+  .blurfill { position: absolute; inset: -40px; background-size: cover; background-position: center; filter: blur(30px) saturate(1.05) brightness(.95); }
+  .dark-band > .blurfill, .interlude > .blurfill { z-index: -2; }
   .corner { position: absolute; pointer-events: none; z-index: 0; aspect-ratio: 1414 / 2000; background-repeat: no-repeat; background-size: 100% 100%; width: clamp(170px, 28vw, 340px); }
   .corner.tl { top: 0; left: 0; background-image: var(--img-corner-tl); }
   .corner.br { bottom: 0; right: 0; background-image: var(--img-corner-br); }
@@ -152,7 +158,7 @@
   .cover-open:hover { background: var(--gold-light); color: var(--navy); }
   @keyframes drift { from { transform: scale(1.12); } to { transform: scale(1); } }
 
-  .dark-band { position: relative; isolation: isolate; color: #FBF7EE; margin-inline: -16px; }
+  .dark-band { position: relative; isolation: isolate; color: #FBF7EE; margin-inline: -16px; overflow: hidden; }
   .dark-band > .bgimg, .interlude > .bgimg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
   .dark-band::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(12,22,50,.78), rgba(12,22,50,.62) 45%, rgba(12,22,50,.82)); }
   .dark-band .sec-head h2 { color: #FBF7EE; }
@@ -463,7 +469,7 @@
 </nav>
 
 <section class="cover" aria-label="The wedding of Norman and Angenith">
-  <img class="cover-img" src="bg-76.jpg" alt="Norman and Angenith walking hand in hand down a tree-lined path">
+  <img class="cover-img" data-face="0.54 0.25" src="bg-76.jpg" alt="Norman and Angenith walking hand in hand down a tree-lined path">
   <div class="cover-text">
     <p class="cover-eyebrow">The Wedding of</p>
     <p class="cover-names">Norman <span>&amp;</span> Angenith</p>
@@ -482,7 +488,7 @@
     <h1 class="names">Norman<span class="amp">&amp;</span>Angenith</h1>
     <p class="small-caps">request the pleasure of your company<br>at the celebration of their marriage</p>
     <hr class="rule">
-    <p class="when">Saturday, October 31<sup>st</sup> 2026<br><b>at three o'clock in the afternoon</b></p>
+    <p class="when">Saturday, October 31<sup>st</sup> 2026<br><b>at two o'clock in the afternoon</b></p>
     <p class="where">LJ Mega Convention<br>Butuan City</p>
     <p class="to-follow">reception to follow</p>
   </div>
@@ -490,7 +496,7 @@
 
 <main>
   <section class="band dark-band" id="countdown" aria-label="Time until the wedding">
-    <img class="bgimg" src="bg-79.jpg" alt="" loading="lazy" style="object-position: 50% 40%">
+    <img class="bgimg" src="bg-79.jpg" alt="" loading="lazy" data-face="0.55 0.35">
     <div class="spray left" aria-hidden="true"></div>
     <div class="spray right" aria-hidden="true"></div>
     <div class="inner">
@@ -514,7 +520,7 @@
   </section>
 
   <section class="band has-photo" id="details">
-    <div class="sec-photo"><img src="bg-66.jpg" alt="" loading="lazy" style="object-position: 50% 30%"></div>
+    <div class="sec-photo"><img src="bg-66.jpg" alt="" loading="lazy" data-face="0.52 0.24"></div>
     <div class="inner">
       <div class="sec-head">
         <p class="small-caps">When &amp; where</p>
@@ -525,7 +531,7 @@
         <article class="arch event">
           <div class="crown" aria-hidden="true"></div>
           <h3>Wedding Ceremony</h3>
-          <p class="time">3:00 in the afternoon</p>
+          <p class="time">2:00 in the afternoon</p>
           <p class="place">LJ Mega Convention</p>
           <p class="addr">Saturday, 31 October 2026</p>
         </article>
@@ -541,12 +547,12 @@
   </section>
 
   <section class="interlude" aria-label="Scripture">
-    <img class="bgimg" src="bg-67.jpg" alt="" loading="lazy" style="object-position: 50% 35%">
+    <img class="bgimg" src="bg-67.jpg" alt="" loading="lazy" data-face="0.52 0.25">
     <blockquote><p>&#8220;Therefore what God has joined together, let no one separate.&#8221;</p><cite>Mark 10:9</cite></blockquote>
   </section>
 
   <section class="band has-photo" id="map">
-    <div class="sec-photo"><img src="bg-63.jpg" alt="" loading="lazy" style="object-position: 50% 35%"></div>
+    <div class="sec-photo"><img src="bg-63.jpg" alt="" loading="lazy" data-face="0.47 0.25"></div>
     <div class="inner">
       <div class="sec-head">
         <p class="small-caps">Finding your way</p>
@@ -571,7 +577,7 @@
   </section>
 
   <section class="band has-photo" id="entourage">
-    <div class="sec-photo"><img src="bg-73.jpg" alt="" loading="lazy" style="object-position: 50% 28%"></div>
+    <div class="sec-photo"><img src="bg-73.jpg" alt="" loading="lazy" data-face="0.45 0.27"></div>
     <div class="inner">
       <div class="sec-head">
         <p class="small-caps">With the guidance and blessing of</p>
@@ -587,12 +593,12 @@
   </section>
 
   <section class="interlude" aria-label="Scripture">
-    <img class="bgimg" src="bg-77.jpg" alt="" loading="lazy" style="object-position: 70% 40%">
+    <img class="bgimg" src="bg-77.jpg" alt="" loading="lazy" data-face="0.62 0.30">
     <blockquote><p>&#8220;A cord of three strands is not quickly broken.&#8221;</p><cite>Ecclesiastes 4:12</cite></blockquote>
   </section>
 
   <section class="band has-photo" id="attire">
-    <div class="sec-photo"><img src="bg-65.jpg" alt="" loading="lazy" style="object-position: 50% 30%"></div>
+    <div class="sec-photo"><img src="bg-65.jpg" alt="" loading="lazy" data-face="0.45 0.15"></div>
     <div class="inner">
       <div class="sec-head" style="margin-bottom:0">
         <p class="small-caps">Dress code</p>
@@ -613,12 +619,12 @@
   </section>
 
   <section class="mosaic" aria-label="Portraits">
-    <img src="bg-62.jpg" alt="" loading="lazy" style="object-position: 50% 20%">
-    <img src="bg-71.jpg" alt="" loading="lazy" style="object-position: 50% 25%">
-    <img src="bg-64.jpg" alt="" loading="lazy" style="object-position: 50% 25%">
-    <img src="bg-69.jpg" alt="" loading="lazy" style="object-position: 50% 45%">
-    <img src="bg-74.jpg" alt="" loading="lazy" style="object-position: 50% 25%">
-    <img src="bg-75.jpg" alt="" loading="lazy" style="object-position: 50% 25%">
+    <img src="bg-62.jpg" alt="" loading="lazy" data-face="0.52 0.19">
+    <img src="bg-71.jpg" alt="" loading="lazy" data-face="0.42 0.26">
+    <img src="bg-64.jpg" alt="" loading="lazy" data-face="0.45 0.24">
+    <img src="bg-69.jpg" alt="" loading="lazy" data-face="0.50 0.47">
+    <img src="bg-74.jpg" alt="" loading="lazy" data-face="0.55 0.20">
+    <img src="bg-70.jpg" alt="" loading="lazy" data-face="0.45 0.40">
   </section>
 
   <section class="band" id="gallery">
@@ -638,12 +644,12 @@
   </section>
 
   <section class="interlude" aria-label="Scripture">
-    <img class="bgimg" src="bg-78.jpg" alt="" loading="lazy" style="object-position: 50% 30%">
+    <img class="bgimg" src="bg-78.jpg" alt="" loading="lazy" data-face="0.46 0.25">
     <blockquote><p>&#8220;Love bears all things, believes all things, hopes all things, endures all things.&#8221;</p><cite>1 Corinthians 13:7</cite></blockquote>
   </section>
 
   <section class="band has-photo" id="gift">
-    <div class="sec-photo"><img src="bg-70.jpg" alt="" loading="lazy" style="object-position: 50% 40%"></div>
+    <div class="sec-photo"><img src="bg-75.jpg" alt="" loading="lazy" data-face="0.60 0.18"></div>
     <div class="spray left" aria-hidden="true"></div>
     <div class="spray right" aria-hidden="true"></div>
     <div class="inner">
@@ -677,7 +683,7 @@
   </section>
 
   <section class="band dark-band" id="rsvp">
-    <img class="bgimg" src="bg-72.jpg" alt="" loading="lazy" style="object-position: 50% 25%">
+    <img class="bgimg" src="bg-72.jpg" alt="" loading="lazy" data-face="0.50 0.28">
     <div class="inner">
       <div class="rsvp">
         <svg class="geo" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
@@ -736,7 +742,7 @@
 </main>
 
 <footer class="dark-band foot">
-  <img class="bgimg" src="bg-68.jpg" alt="" loading="lazy" style="object-position: 50% 30%">
+  <img class="bgimg" src="bg-68.jpg" alt="" loading="lazy" data-face="0.45 0.26">
   <div class="arch closing">
     <div class="crown" aria-hidden="true"></div>
     <p class="names">Norman<span class="amp">&amp;</span>Angenith</p>
@@ -962,9 +968,64 @@
     root.innerHTML = html;
   })();
 
-  // ---------- Countdown to 31 Oct 2026, 3:00 PM Philippine time ----------
+  // ---------- Face-aware framing: crop each background photo so the couple's faces stay in view on any screen ----------
   (function () {
-    var target = new Date("2026-10-31T15:00:00+08:00").getTime();
+    // where the faces should sit, as a share of the frame's height (text sits below or over the rest)
+    function anchorFor(img) {
+      if (img.closest(".cover")) return 0.30;
+      if (img.closest(".interlude")) return 0.24;
+      if (img.closest(".sec-photo")) return 0.40;
+      if (img.closest(".mosaic")) return 0.38;
+      return 0.32;
+    }
+    // the lowest the faces may sit before a tall photo gets narrowed (text or a fade covers the rest)
+    function maxFor(img) {
+      if (img.closest(".cover")) return 0.42;
+      if (img.closest(".interlude")) return 0.38;
+      if (img.closest(".sec-photo")) return 0.48;
+      return 0.5;
+    }
+    function frame(img) {
+      var f = img.getAttribute("data-face").split(" ").map(Number);
+      // banner photos are measured against their banner; mosaic tiles are their own frame
+      var banner = img.classList.contains("bgimg") || img.parentElement.classList.contains("sec-photo");
+      var iw = img.naturalWidth, ih = img.naturalHeight, box = banner ? img.parentElement : img;
+      var cw = box.clientWidth, ch = img.clientHeight;
+      if (!iw || !cw || !ch) return;
+      var a = anchorFor(img), m = maxFor(img), s = Math.max(cw / iw, ch / ih);
+      // a tall photo in a wide banner: shrink it just enough that the faces sit no lower than m
+      if (banner && f[1] * ih * s > ch * m + 1) s = Math.max(ch / ih, (ch * m) / (f[1] * ih));
+      var dw = iw * s, dh = ih * s, narrow = banner && dw < cw - 1;
+      img.classList.toggle("narrow", narrow);
+      var fill = img.previousElementSibling && img.previousElementSibling.classList.contains("blurfill") ? img.previousElementSibling : null;
+      if (narrow && !fill) { fill = document.createElement("div"); fill.className = "blurfill"; fill.setAttribute("aria-hidden", "true"); img.parentElement.insertBefore(fill, img); }
+      if (fill) { fill.hidden = !narrow; if (narrow) fill.style.backgroundImage = 'url("' + (img.currentSrc || img.src) + '")'; }
+      if (narrow) {
+        var left = Math.min(cw - dw, Math.max(0, cw / 2 - f[0] * dw));
+        img.style.width = dw.toFixed(1) + "px";
+        if (img.classList.contains("bgimg")) { img.style.left = left.toFixed(1) + "px"; img.style.right = "auto"; } else img.style.marginLeft = left.toFixed(1) + "px";
+        img.style.objectPosition = "0px " + Math.min(0, Math.max(ch - dh, ch * a - f[1] * dh)).toFixed(1) + "px";
+        return;
+      }
+      img.style.width = ""; img.style.marginLeft = ""; img.style.left = ""; img.style.right = "";
+      var ox = Math.min(0, Math.max(cw - dw, cw / 2 - f[0] * dw));
+      var oy = Math.min(0, Math.max(ch - dh, ch * a - f[1] * dh));
+      img.style.objectPosition = ox.toFixed(1) + "px " + oy.toFixed(1) + "px";
+    }
+    var imgs = Array.prototype.slice.call(document.querySelectorAll("img[data-face]"));
+    imgs.forEach(function (img) { if (img.complete) frame(img); img.addEventListener("load", function () { frame(img); }); });
+    // re-frame whenever a photo box changes size (rotation, resize, fonts loading)
+    if (window.ResizeObserver) { var ro = new ResizeObserver(function (es) { es.forEach(function (e) { e.target.querySelectorAll(":scope > img[data-face], :scope > .sec-photo > img[data-face]").forEach(frame); }); }); imgs.forEach(function (img) { ro.observe(img.parentElement); }); }
+    // mosaic tiles: watch the tiles themselves
+    if (window.ResizeObserver) { var ro2 = new ResizeObserver(function (es) { es.forEach(function (e) { frame(e.target); }); }); document.querySelectorAll(".mosaic img[data-face]").forEach(function (img) { ro2.observe(img); }); }
+    // backup: also re-frame on window resize and phone rotation
+    var t; function refit() { clearTimeout(t); t = setTimeout(function () { imgs.forEach(frame); }, 120); }
+    addEventListener("resize", refit); addEventListener("orientationchange", refit);
+  })();
+
+  // ---------- Countdown to 31 Oct 2026, 2:00 PM Philippine time ----------
+  (function () {
+    var target = new Date("2026-10-31T14:00:00+08:00").getTime();
     var el = { d: document.getElementById("cd-d"), h: document.getElementById("cd-h"), m: document.getElementById("cd-m"), s: document.getElementById("cd-s") };
     function pad(n) { return String(n).padStart(2, "0"); }
     function tick() {
