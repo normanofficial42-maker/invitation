@@ -45,7 +45,7 @@
     padding-inline: 16px;
     overflow-x: hidden;
   }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; } }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; } .cover-img { animation: none; } }
   a { color: var(--royal); }
   :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 
@@ -132,6 +132,45 @@
   .spray { position: absolute; top: 50%; pointer-events: none; z-index: 0; aspect-ratio: 1414 / 2000; width: clamp(110px, 20vw, 280px); background: var(--img-spray) left center / 100% 100% no-repeat; transform: translateY(-50%); }
   .spray.left { left: 0; }
   .spray.right { right: 0; transform: translateY(-50%) scaleX(-1); }
+
+  /* ---------- Luxury layer: full-bleed photo cover, photo-backed sections, scripture interludes ---------- */
+  .cover { position: relative; margin-inline: -16px; height: 100vh; height: 100svh; min-height: 560px; max-height: 1100px; overflow: hidden; display: flex; align-items: flex-end; justify-content: center; text-align: center; color: #FBF7EE; isolation: isolate; }
+  .cover-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 55% 45%; z-index: -2; animation: drift 24s ease-out both; }
+  .cover::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(10,18,40,.35) 0%, rgba(10,18,40,.05) 28%, rgba(10,18,40,.5) 52%, rgba(10,18,40,.9) 100%); }
+  .cover::after { content: ""; position: absolute; inset: 14px; border: 1px solid rgba(220,199,148,.55); pointer-events: none; }
+  .cover-text { padding: 0 24px clamp(56px, 11vh, 110px); max-width: 720px; }
+  .cover-eyebrow { font-family: var(--caps); font-size: .78rem; font-weight: 600; letter-spacing: .42em; text-transform: uppercase; color: var(--gold-light); margin: 0; }
+  .cover-names { font-family: var(--script); font-size: clamp(3.4rem, 13vw, 7.2rem); line-height: 1; margin: 14px 0 6px; text-shadow: 0 4px 30px rgba(0,0,0,.35); }
+  .cover-names span { color: var(--gold-light); font-size: .6em; }
+  .cover-rule { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 14px 0; }
+  .cover-rule::before, .cover-rule::after { content: ""; width: 80px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-light)); }
+  .cover-rule::after { transform: scaleX(-1); }
+  .cover-rule i { width: 7px; height: 7px; background: var(--gold-light); transform: rotate(45deg); }
+  .cover-date { font-family: var(--caps); font-size: clamp(1.2rem, 4vw, 1.7rem); letter-spacing: .3em; margin: 0; }
+  .cover-place { font-family: var(--caps); font-size: .78rem; letter-spacing: .24em; text-transform: uppercase; color: #E9E1CF; margin: 10px 0 0; }
+  .cover-open { display: inline-block; margin-top: 28px; padding: 12px 30px; border: 1px solid var(--gold-light); color: #FBF7EE; text-decoration: none; font-family: var(--caps); font-size: .72rem; font-weight: 600; letter-spacing: .28em; text-transform: uppercase; background: rgba(10,18,40,.25); backdrop-filter: blur(3px); transition: background .3s, color .3s; }
+  .cover-open:hover { background: var(--gold-light); color: var(--navy); }
+  @keyframes drift { from { transform: scale(1.12); } to { transform: scale(1); } }
+
+  .dark-band { position: relative; isolation: isolate; color: #FBF7EE; margin-inline: -16px; }
+  .dark-band > .bgimg, .interlude > .bgimg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+  .dark-band::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(12,22,50,.78), rgba(12,22,50,.62) 45%, rgba(12,22,50,.82)); }
+  .dark-band .sec-head h2 { color: #FBF7EE; }
+  .dark-band .sec-head .small-caps, .dark-band .countdown-date { color: var(--gold-light); }
+  .dark-band .wreath-blue .bg { filter: drop-shadow(0 10px 30px rgba(0,0,0,.35)); }
+  footer.foot { padding-inline: 16px; }
+
+  .interlude { position: relative; isolation: isolate; margin-inline: -16px; min-height: clamp(420px, 70vh, 720px); display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
+  .interlude::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse at center, rgba(12,22,50,.45), rgba(12,22,50,.78)); }
+  .interlude::after { content: ""; position: absolute; inset: 14px; border: 1px solid rgba(220,199,148,.45); pointer-events: none; }
+  .interlude blockquote { margin: 0; padding: 0 28px; max-width: 640px; color: #FBF7EE; }
+  .interlude blockquote p { font-family: var(--script); font-size: clamp(2rem, 7vw, 3.4rem); line-height: 1.2; margin: 0; text-shadow: 0 3px 24px rgba(0,0,0,.4); }
+  .interlude cite { display: block; margin-top: 18px; font-style: normal; font-family: var(--caps); font-size: .78rem; font-weight: 600; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-light); }
+
+  .mosaic { margin-inline: -16px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; background: var(--navy); padding: 4px; }
+  .mosaic img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; display: block; filter: saturate(.92); transition: filter .4s; }
+  .mosaic img:hover { filter: saturate(1.05); }
+  @media (max-width: 640px) { .mosaic { grid-template-columns: repeat(3, 1fr); } .cover::after, .interlude::after { inset: 10px; } }
 
   .sec-head { text-align: center; margin-bottom: 30px; }
   .sec-head h2 { font-family: var(--script); font-weight: 400; font-size: clamp(2.3rem, 7vw, 3.1rem); line-height: 1.1; color: var(--navy); margin: 4px 0 0; text-wrap: balance; }
@@ -423,6 +462,18 @@
   </ul>
 </nav>
 
+<section class="cover" aria-label="The wedding of Norman and Angenith">
+  <img class="cover-img" src="bg-76.jpg" alt="Norman and Angenith walking hand in hand down a tree-lined path">
+  <div class="cover-text">
+    <p class="cover-eyebrow">The Wedding of</p>
+    <p class="cover-names">Norman <span>&amp;</span> Angenith</p>
+    <div class="cover-rule"><i></i></div>
+    <p class="cover-date">10 &middot; 31 &middot; 2026</p>
+    <p class="cover-place">LJ Mega Convention &middot; Butuan City</p>
+    <a class="cover-open" href="#invite">Open invitation</a>
+  </div>
+</section>
+
 <header class="art invite" id="invite">
   <div class="bg" aria-hidden="true"></div>
   <div class="slot">
@@ -438,8 +489,8 @@
 </header>
 
 <main>
-  <section class="band has-photo" id="countdown" aria-label="Time until the wedding">
-    <div class="sec-photo"><img src="gallery-25.jpg" alt="" loading="lazy" style="object-position: 50% 35%"></div>
+  <section class="band dark-band" id="countdown" aria-label="Time until the wedding">
+    <img class="bgimg" src="bg-79.jpg" alt="" loading="lazy" style="object-position: 50% 40%">
     <div class="spray left" aria-hidden="true"></div>
     <div class="spray right" aria-hidden="true"></div>
     <div class="inner">
@@ -463,7 +514,7 @@
   </section>
 
   <section class="band has-photo" id="details">
-    <div class="sec-photo"><img src="gallery-22.jpg" alt="" loading="lazy" style="object-position: 50% 40%"></div>
+    <div class="sec-photo"><img src="bg-66.jpg" alt="" loading="lazy" style="object-position: 50% 30%"></div>
     <div class="inner">
       <div class="sec-head">
         <p class="small-caps">When &amp; where</p>
@@ -489,8 +540,13 @@
     </div>
   </section>
 
+  <section class="interlude" aria-label="Scripture">
+    <img class="bgimg" src="bg-67.jpg" alt="" loading="lazy" style="object-position: 50% 35%">
+    <blockquote><p>&#8220;Therefore what God has joined together, let no one separate.&#8221;</p><cite>Mark 10:9</cite></blockquote>
+  </section>
+
   <section class="band has-photo" id="map">
-    <div class="sec-photo"><img src="gallery-26.jpg" alt="" loading="lazy" style="object-position: 50% 55%"></div>
+    <div class="sec-photo"><img src="bg-63.jpg" alt="" loading="lazy" style="object-position: 50% 35%"></div>
     <div class="inner">
       <div class="sec-head">
         <p class="small-caps">Finding your way</p>
@@ -515,7 +571,7 @@
   </section>
 
   <section class="band has-photo" id="entourage">
-    <div class="sec-photo"><img src="gallery-21.jpg" alt="" loading="lazy" style="object-position: 55% 35%"></div>
+    <div class="sec-photo"><img src="bg-73.jpg" alt="" loading="lazy" style="object-position: 50% 28%"></div>
     <div class="inner">
       <div class="sec-head">
         <p class="small-caps">With the guidance and blessing of</p>
@@ -530,8 +586,13 @@
     </div>
   </section>
 
+  <section class="interlude" aria-label="Scripture">
+    <img class="bgimg" src="bg-77.jpg" alt="" loading="lazy" style="object-position: 70% 40%">
+    <blockquote><p>&#8220;A cord of three strands is not quickly broken.&#8221;</p><cite>Ecclesiastes 4:12</cite></blockquote>
+  </section>
+
   <section class="band has-photo" id="attire">
-    <div class="sec-photo"><img src="gallery-24.jpg" alt="" loading="lazy" style="object-position: 60% 30%"></div>
+    <div class="sec-photo"><img src="bg-65.jpg" alt="" loading="lazy" style="object-position: 50% 30%"></div>
     <div class="inner">
       <div class="sec-head" style="margin-bottom:0">
         <p class="small-caps">Dress code</p>
@@ -551,6 +612,15 @@
     </div>
   </section>
 
+  <section class="mosaic" aria-label="Portraits">
+    <img src="bg-62.jpg" alt="" loading="lazy" style="object-position: 50% 20%">
+    <img src="bg-71.jpg" alt="" loading="lazy" style="object-position: 50% 25%">
+    <img src="bg-64.jpg" alt="" loading="lazy" style="object-position: 50% 25%">
+    <img src="bg-69.jpg" alt="" loading="lazy" style="object-position: 50% 45%">
+    <img src="bg-74.jpg" alt="" loading="lazy" style="object-position: 50% 25%">
+    <img src="bg-75.jpg" alt="" loading="lazy" style="object-position: 50% 25%">
+  </section>
+
   <section class="band" id="gallery">
     <div class="inner">
       <div class="sec-head">
@@ -567,8 +637,13 @@
     </div>
   </section>
 
+  <section class="interlude" aria-label="Scripture">
+    <img class="bgimg" src="bg-78.jpg" alt="" loading="lazy" style="object-position: 50% 30%">
+    <blockquote><p>&#8220;Love bears all things, believes all things, hopes all things, endures all things.&#8221;</p><cite>1 Corinthians 13:7</cite></blockquote>
+  </section>
+
   <section class="band has-photo" id="gift">
-    <div class="sec-photo"><img src="gallery-29.jpg" alt="" loading="lazy" style="object-position: 30% 40%"></div>
+    <div class="sec-photo"><img src="bg-70.jpg" alt="" loading="lazy" style="object-position: 50% 40%"></div>
     <div class="spray left" aria-hidden="true"></div>
     <div class="spray right" aria-hidden="true"></div>
     <div class="inner">
@@ -601,8 +676,8 @@
     </div>
   </section>
 
-  <section class="band has-photo" id="rsvp">
-    <div class="sec-photo"><img src="gallery-33.jpg" alt="" loading="lazy" style="object-position: 60% 30%"></div>
+  <section class="band dark-band" id="rsvp">
+    <img class="bgimg" src="bg-72.jpg" alt="" loading="lazy" style="object-position: 50% 25%">
     <div class="inner">
       <div class="rsvp">
         <svg class="geo" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
@@ -660,7 +735,8 @@
   </section>
 </main>
 
-<footer>
+<footer class="dark-band foot">
+  <img class="bgimg" src="bg-68.jpg" alt="" loading="lazy" style="object-position: 50% 30%">
   <div class="arch closing">
     <div class="crown" aria-hidden="true"></div>
     <p class="names">Norman<span class="amp">&amp;</span>Angenith</p>
