@@ -121,6 +121,10 @@
   /* ---------- Sections ---------- */
   .band { position: relative; margin-inline: -16px; padding: 84px 16px 90px; scroll-margin-top: 50px; overflow: hidden; }
   .band .inner { max-width: 940px; margin: 0 auto; position: relative; z-index: 1; }
+  /* photo header: a wide couple photo that fades softly into the page, text sits below it */
+  .band.has-photo { padding-top: 0; }
+  .sec-photo { position: relative; z-index: 1; margin: 0 -16px 34px; height: clamp(260px, 56vw, 560px); -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 100%); mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 100%); }
+  .sec-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .corner { position: absolute; pointer-events: none; z-index: 0; aspect-ratio: 1414 / 2000; background-repeat: no-repeat; background-size: 100% 100%; width: clamp(170px, 28vw, 340px); }
   .corner.tl { top: 0; left: 0; background-image: var(--img-corner-tl); }
   .corner.br { bottom: 0; right: 0; background-image: var(--img-corner-br); }
@@ -434,7 +438,8 @@
 </header>
 
 <main>
-  <section class="band" id="countdown" aria-label="Time until the wedding">
+  <section class="band has-photo" id="countdown" aria-label="Time until the wedding">
+    <div class="sec-photo"><img src="gallery-25.jpg" alt="" loading="lazy" style="object-position: 50% 35%"></div>
     <div class="spray left" aria-hidden="true"></div>
     <div class="spray right" aria-hidden="true"></div>
     <div class="inner">
@@ -457,7 +462,8 @@
     </div>
   </section>
 
-  <section class="band" id="details">
+  <section class="band has-photo" id="details">
+    <div class="sec-photo"><img src="gallery-22.jpg" alt="" loading="lazy" style="object-position: 50% 40%"></div>
     <div class="inner">
       <div class="sec-head">
         <p class="small-caps">When &amp; where</p>
@@ -483,7 +489,8 @@
     </div>
   </section>
 
-  <section class="band" id="map">
+  <section class="band has-photo" id="map">
+    <div class="sec-photo"><img src="gallery-26.jpg" alt="" loading="lazy" style="object-position: 50% 55%"></div>
     <div class="inner">
       <div class="sec-head">
         <p class="small-caps">Finding your way</p>
@@ -507,7 +514,8 @@
     </div>
   </section>
 
-  <section class="band" id="entourage">
+  <section class="band has-photo" id="entourage">
+    <div class="sec-photo"><img src="gallery-21.jpg" alt="" loading="lazy" style="object-position: 55% 35%"></div>
     <div class="inner">
       <div class="sec-head">
         <p class="small-caps">With the guidance and blessing of</p>
@@ -522,7 +530,8 @@
     </div>
   </section>
 
-  <section class="band" id="attire">
+  <section class="band has-photo" id="attire">
+    <div class="sec-photo"><img src="gallery-24.jpg" alt="" loading="lazy" style="object-position: 60% 30%"></div>
     <div class="inner">
       <div class="sec-head" style="margin-bottom:0">
         <p class="small-caps">Dress code</p>
@@ -558,7 +567,8 @@
     </div>
   </section>
 
-  <section class="band" id="gift">
+  <section class="band has-photo" id="gift">
+    <div class="sec-photo"><img src="gallery-29.jpg" alt="" loading="lazy" style="object-position: 30% 40%"></div>
     <div class="spray left" aria-hidden="true"></div>
     <div class="spray right" aria-hidden="true"></div>
     <div class="inner">
@@ -591,7 +601,8 @@
     </div>
   </section>
 
-  <section class="band" id="rsvp">
+  <section class="band has-photo" id="rsvp">
+    <div class="sec-photo"><img src="gallery-33.jpg" alt="" loading="lazy" style="object-position: 60% 30%"></div>
     <div class="inner">
       <div class="rsvp">
         <svg class="geo" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
