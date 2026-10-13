@@ -223,7 +223,7 @@
 
   /* Map */
   .map-card { padding: 14px; }
-  .map-frame { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--wash); }
+  .map-frame { position: relative; aspect-ratio: 16 / 9; max-height: 72vh; width: 100%; overflow: hidden; background: var(--wash); }
   .map-frame iframe, .map-frame img { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover; }
   .map-frame canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
   .map-frame .pin-label {
@@ -415,12 +415,18 @@
     .sponsors { gap: 8px 6px; font-size: .74rem; }
     .arrow { width: 36px; height: 36px; }
     .arrow.prev { left: 0; } .arrow.next { right: 0; }
-    .map-frame { aspect-ratio: 4 / 3; }
+    /* phone map: taller frame, slimmer card, centered address, equal full-width buttons */
+    .map-card { padding: 8px; }
+    .map-frame { aspect-ratio: auto; height: min(78vw, 60vh); min-height: 260px; }
+    .map-meta { flex-direction: column; align-items: stretch; text-align: center; padding: 14px 4px 6px; }
+    .map-meta .btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .map-meta .btn { padding: 12px 6px; letter-spacing: .1em; font-size: .64rem; text-align: center; }
     .ent-wrap .bouquet { width: 110px; }
     .ent-wrap .bouquet.left { left: -30px; top: -80px; }
     .ent-wrap .bouquet.right { right: -30px; bottom: -80px; }
   }
   @media (max-width: 380px) {
+    .map-meta .btns { grid-template-columns: 1fr; }
     .ent-group li, .ent-group p { font-size: .72rem; }
     .sponsors { font-size: .68rem; gap: 7px 4px; }
     .nav a { font-size: .72rem; }
@@ -1120,7 +1126,9 @@
     var embed = MAP_EMBED === true || (MAP_EMBED === "auto" && /(\.github\.io|\.netlify\.app|\.vercel\.app)$/.test(host));
     if (embed) {
       var f = document.createElement("iframe");
-      f.src = "https://www.google.com/maps?q=" + q + "&z=17&output=embed";
+      // t=h: satellite imagery with street names on top
+      f.src = "https://www.google.com/maps?q=" + q + "&t=h&z=" + (innerWidth < 640 ? 17 : 18) + "&output=embed";
+      f.setAttribute("allowfullscreen", ""); f.referrerPolicy = "no-referrer-when-downgrade";
       f.title = "Map to LJ Mega Convention"; f.loading = "lazy";
       frame.appendChild(f); frame.classList.add("has-map");
       return;
